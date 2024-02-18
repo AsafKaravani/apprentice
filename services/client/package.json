@@ -1,5 +1,5 @@
 {
-	"name": "@elevate/client",
+	"name": "@apprentice/client",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -22,6 +22,7 @@
 		"country-code-lookup": "^0.1.0",
 		"firebase": "^10.6.0",
 		"graphql-zeus": "^5.3.3",
+		"hasura-cli": "^2.36.1",
 		"i18next": "^23.7.6",
 		"moment": "^2.30.1",
 		"react": "^18.2.0",

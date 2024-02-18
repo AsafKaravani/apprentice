@@ -1,4 +1,4 @@
-# elevate Client App
+# Apprentice Client App
 
 ## Tech Stack
 

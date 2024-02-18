@@ -45,7 +45,7 @@ export const SideMenu: FC = React.memo(() => {
 						<i className='fal fa-times'></i>
 					</div>
 					<span className='font-bold text-white'>
-							Elevate
+						Apprentice
 					</span>
 					<div className='w-[48px]'></div>
 				</ListItem>
@@ -64,7 +64,7 @@ export const SideMenu: FC = React.memo(() => {
 							</ListItemButton>
 						</ListItem>
 						<ListItem className={isActive('/s/types')}>
-							<ListItemButton  onClick={goto('/s/types')}>
+							<ListItemButton  onClick={goto('/s/elevators')}>
 								<i className='fa-solid w-5 fa-grid me-2 text-primary-color opacity-75'></i>
 								<ListItemText primary="סוגים"/>
 							</ListItemButton>

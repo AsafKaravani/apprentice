@@ -1,4 +1,5 @@
-import { Chain, ZeusScalars } from './index';
+import { Chain, Thunder, ZeusScalars } from './index';
+
 
 export const scalars: any = ZeusScalars({
 	timestamp: {
@@ -26,4 +27,33 @@ export const scalars: any = ZeusScalars({
 
 const removeQuotesFromKeys = (stringifiedJson: string) => stringifiedJson.replace(/"([^"]+)":/g, '$1:');
 
-export const chain = Chain(import.meta.env.VITE_HASURA_GQL_ENDPOINT);
+export const chain = Thunder(async (query) => {
+	const response = await fetch(
+		import.meta.env.VITE_HASURA_GQL_ENDPOINT,
+		{
+			body: JSON.stringify({ query }),
+			method: 'POST',
+			headers: {
+			},
+		},
+	);
+
+	if (!response.ok) {
+		return new Promise((resolve, reject) => {
+			response
+				.text()
+				.then((text) => {
+					try {
+						reject(JSON.parse(text));
+					} catch (err) {
+						reject(text);
+					}
+				})
+				.catch(reject);
+		});
+	}
+
+	const json = await response.json();
+
+	return json.data;
+});

@@ -1,8 +1,8 @@
 {
-  "name": "elevate",
+  "name": "apprentice",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/AsafKaravani/elevate.git",
+  "repository": "https://github.com/AsafKaravani/apprentice.git",
   "author": "Assaf Koren <assafnoahkoren@gmail.com>",
   "license": "MIT",
   "private": true,

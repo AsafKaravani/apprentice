@@ -31,6 +31,11 @@ export const ProfileButton: FC = () => {
 				className="text-white rounded-none h-full flex gap-2 items-center"
 			>
 				<Avatar className="w-7 h-7" src={profile?.picture_url} />
+				{!profile?.first_name && (
+					<span>
+						{user?.email}
+					</span>
+				)}
 				<span>
 					{profile?.first_name} {profile?.last_name}
 				</span>
