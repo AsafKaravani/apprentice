@@ -16,7 +16,7 @@ export const AllTypesProps: Record<string,any> = {
 		created_at:"timestamp_comparison_exp",
 		email:"String_comparison_exp",
 		first_name:"String_comparison_exp",
-		id:"uuid_comparison_exp",
+		id:"String_comparison_exp",
 		last_name:"String_comparison_exp",
 		phone:"String_comparison_exp",
 		picture_url:"String_comparison_exp",
@@ -25,7 +25,6 @@ export const AllTypesProps: Record<string,any> = {
 	Profile_constraint: "enum" as const,
 	Profile_insert_input:{
 		created_at:"timestamp",
-		id:"uuid",
 		updated_at:"timestamp"
 	},
 	Profile_on_conflict:{
@@ -44,12 +43,11 @@ export const AllTypesProps: Record<string,any> = {
 		updated_at:"order_by"
 	},
 	Profile_pk_columns_input:{
-		id:"uuid"
+
 	},
 	Profile_select_column: "enum" as const,
 	Profile_set_input:{
 		created_at:"timestamp",
-		id:"uuid",
 		updated_at:"timestamp"
 	},
 	Profile_stream_cursor_input:{
@@ -58,7 +56,6 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	Profile_stream_cursor_value_input:{
 		created_at:"timestamp",
-		id:"uuid",
 		updated_at:"timestamp"
 	},
 	Profile_update_column: "enum" as const,
@@ -141,7 +138,7 @@ export const AllTypesProps: Record<string,any> = {
 			where:"Profile_bool_exp"
 		},
 		delete_Profile_by_pk:{
-			id:"uuid"
+
 		},
 		delete__prisma_migrations:{
 			where:"_prisma_migrations_bool_exp"
@@ -203,7 +200,7 @@ export const AllTypesProps: Record<string,any> = {
 			where:"Profile_bool_exp"
 		},
 		Profile_by_pk:{
-			id:"uuid"
+
 		},
 		_prisma_migrations:{
 			distinct_on:"_prisma_migrations_select_column",
@@ -231,7 +228,7 @@ export const AllTypesProps: Record<string,any> = {
 			where:"Profile_bool_exp"
 		},
 		Profile_by_pk:{
-			id:"uuid"
+
 		},
 		Profile_stream:{
 			cursor:"Profile_stream_cursor_input",
@@ -276,17 +273,6 @@ export const AllTypesProps: Record<string,any> = {
 		_lte:"timestamptz",
 		_neq:"timestamptz",
 		_nin:"timestamptz"
-	},
-	uuid: `scalar.uuid` as const,
-	uuid_comparison_exp:{
-		_eq:"uuid",
-		_gt:"uuid",
-		_gte:"uuid",
-		_in:"uuid",
-		_lt:"uuid",
-		_lte:"uuid",
-		_neq:"uuid",
-		_nin:"uuid"
 	}
 }
 
@@ -299,7 +285,7 @@ export const ReturnTypes: Record<string,any> = {
 		created_at:"timestamp",
 		email:"String",
 		first_name:"String",
-		id:"uuid",
+		id:"String",
 		last_name:"String",
 		phone:"String",
 		picture_url:"String",
@@ -318,7 +304,7 @@ export const ReturnTypes: Record<string,any> = {
 		created_at:"timestamp",
 		email:"String",
 		first_name:"String",
-		id:"uuid",
+		id:"String",
 		last_name:"String",
 		phone:"String",
 		picture_url:"String",
@@ -328,7 +314,7 @@ export const ReturnTypes: Record<string,any> = {
 		created_at:"timestamp",
 		email:"String",
 		first_name:"String",
-		id:"uuid",
+		id:"String",
 		last_name:"String",
 		phone:"String",
 		picture_url:"String",
@@ -448,8 +434,7 @@ export const ReturnTypes: Record<string,any> = {
 		_prisma_migrations_stream:"_prisma_migrations"
 	},
 	timestamp: `scalar.timestamp` as const,
-	timestamptz: `scalar.timestamptz` as const,
-	uuid: `scalar.uuid` as const
+	timestamptz: `scalar.timestamptz` as const
 }
 
 export const Ops = {

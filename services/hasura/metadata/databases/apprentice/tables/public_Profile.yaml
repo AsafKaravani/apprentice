@@ -2,22 +2,14 @@ table:
   name: Profile
   schema: public
 insert_permissions:
-  - role: anonymous
-    permission:
-      check: {}
-      columns:
-        - email
-        - first_name
-        - last_name
-        - phone
-        - picture_url
-        - created_at
-        - updated_at
-        - id
-    comment: ""
   - role: user
     permission:
       check: {}
+      set:
+        created_at: now()
+        email: x-hasura-user-email
+        id: x-hasura-user-id
+        updated_at: now()
       columns:
         - email
         - first_name
@@ -29,19 +21,6 @@ insert_permissions:
         - id
     comment: ""
 select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - email
-        - first_name
-        - last_name
-        - phone
-        - picture_url
-        - created_at
-        - updated_at
-        - id
-      filter: {}
-    comment: ""
   - role: user
     permission:
       columns:
@@ -56,31 +35,15 @@ select_permissions:
       filter: {}
     comment: ""
 update_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - email
-        - first_name
-        - last_name
-        - phone
-        - picture_url
-        - created_at
-        - updated_at
-        - id
-      filter: {}
-      check: null
-    comment: ""
   - role: user
     permission:
       columns:
-        - email
         - first_name
         - last_name
         - phone
         - picture_url
-        - created_at
-        - updated_at
-        - id
       filter: {}
       check: null
+      set:
+        updated_at: now()
     comment: ""

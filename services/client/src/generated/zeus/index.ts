@@ -841,7 +841,6 @@ type ZEUS_INTERFACES = never
 export type ScalarCoders = {
 	timestamp?: ScalarResolver;
 	timestamptz?: ScalarResolver;
-	uuid?: ScalarResolver;
 }
 type ZEUS_UNIONS = never
 
@@ -891,7 +890,7 @@ count?: [{	columns?: Array<ValueTypes["Profile_select_column"]> | undefined | nu
 	created_at?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
 	email?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	first_name?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
-	id?: ValueTypes["uuid_comparison_exp"] | undefined | null | Variable<any, string>,
+	id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	last_name?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	phone?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	picture_url?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
@@ -904,7 +903,7 @@ count?: [{	columns?: Array<ValueTypes["Profile_select_column"]> | undefined | nu
 	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
 	email?: string | undefined | null | Variable<any, string>,
 	first_name?: string | undefined | null | Variable<any, string>,
-	id?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
+	id?: string | undefined | null | Variable<any, string>,
 	last_name?: string | undefined | null | Variable<any, string>,
 	phone?: string | undefined | null | Variable<any, string>,
 	picture_url?: string | undefined | null | Variable<any, string>,
@@ -961,7 +960,7 @@ count?: [{	columns?: Array<ValueTypes["Profile_select_column"]> | undefined | nu
 };
 	/** primary key columns input for table: Profile */
 ["Profile_pk_columns_input"]: {
-	id: ValueTypes["uuid"] | Variable<any, string>
+	id: string | Variable<any, string>
 };
 	/** select columns of table "Profile" */
 ["Profile_select_column"]:Profile_select_column;
@@ -970,7 +969,7 @@ count?: [{	columns?: Array<ValueTypes["Profile_select_column"]> | undefined | nu
 	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
 	email?: string | undefined | null | Variable<any, string>,
 	first_name?: string | undefined | null | Variable<any, string>,
-	id?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
+	id?: string | undefined | null | Variable<any, string>,
 	last_name?: string | undefined | null | Variable<any, string>,
 	phone?: string | undefined | null | Variable<any, string>,
 	picture_url?: string | undefined | null | Variable<any, string>,
@@ -988,7 +987,7 @@ count?: [{	columns?: Array<ValueTypes["Profile_select_column"]> | undefined | nu
 	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
 	email?: string | undefined | null | Variable<any, string>,
 	first_name?: string | undefined | null | Variable<any, string>,
-	id?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
+	id?: string | undefined | null | Variable<any, string>,
 	last_name?: string | undefined | null | Variable<any, string>,
 	phone?: string | undefined | null | Variable<any, string>,
 	picture_url?: string | undefined | null | Variable<any, string>,
@@ -1238,7 +1237,7 @@ count?: [{	columns?: Array<ValueTypes["_prisma_migrations_select_column"]> | und
 ["mutation_root"]: AliasType<{
 delete_Profile?: [{	/** filter the rows which have to be deleted */
 	where: ValueTypes["Profile_bool_exp"] | Variable<any, string>},ValueTypes["Profile_mutation_response"]],
-delete_Profile_by_pk?: [{	id: ValueTypes["uuid"] | Variable<any, string>},ValueTypes["Profile"]],
+delete_Profile_by_pk?: [{	id: string | Variable<any, string>},ValueTypes["Profile"]],
 delete__prisma_migrations?: [{	/** filter the rows which have to be deleted */
 	where: ValueTypes["_prisma_migrations_bool_exp"] | Variable<any, string>},ValueTypes["_prisma_migrations_mutation_response"]],
 delete__prisma_migrations_by_pk?: [{	id: string | Variable<any, string>},ValueTypes["_prisma_migrations"]],
@@ -1287,7 +1286,7 @@ Profile_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
 	order_by?: Array<ValueTypes["Profile_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
 	where?: ValueTypes["Profile_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["Profile_aggregate"]],
-Profile_by_pk?: [{	id: ValueTypes["uuid"] | Variable<any, string>},ValueTypes["Profile"]],
+Profile_by_pk?: [{	id: string | Variable<any, string>},ValueTypes["Profile"]],
 _prisma_migrations?: [{	/** distinct select on columns */
 	distinct_on?: Array<ValueTypes["_prisma_migrations_select_column"]> | undefined | null | Variable<any, string>,	/** limit the number of rows returned */
 	limit?: number | undefined | null | Variable<any, string>,	/** skip the first n rows. Use only with order_by */
@@ -1316,7 +1315,7 @@ Profile_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
 	order_by?: Array<ValueTypes["Profile_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
 	where?: ValueTypes["Profile_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["Profile_aggregate"]],
-Profile_by_pk?: [{	id: ValueTypes["uuid"] | Variable<any, string>},ValueTypes["Profile"]],
+Profile_by_pk?: [{	id: string | Variable<any, string>},ValueTypes["Profile"]],
 Profile_stream?: [{	/** maximum number of rows returned in a single batch */
 	batch_size: number | Variable<any, string>,	/** cursor to stream the results returned by the query */
 	cursor: Array<ValueTypes["Profile_stream_cursor_input"] | undefined | null> | Variable<any, string>,	/** filter the rows returned */
@@ -1365,19 +1364,6 @@ _prisma_migrations_stream?: [{	/** maximum number of rows returned in a single b
 	_lte?: ValueTypes["timestamptz"] | undefined | null | Variable<any, string>,
 	_neq?: ValueTypes["timestamptz"] | undefined | null | Variable<any, string>,
 	_nin?: Array<ValueTypes["timestamptz"]> | undefined | null | Variable<any, string>
-};
-	["uuid"]:unknown;
-	/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-["uuid_comparison_exp"]: {
-	_eq?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_gt?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_gte?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_in?: Array<ValueTypes["uuid"]> | undefined | null | Variable<any, string>,
-	_is_null?: boolean | undefined | null | Variable<any, string>,
-	_lt?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_lte?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_neq?: ValueTypes["uuid"] | undefined | null | Variable<any, string>,
-	_nin?: Array<ValueTypes["uuid"]> | undefined | null | Variable<any, string>
 }
   }
 
@@ -1433,7 +1419,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Profile_select_column"]> | undefi
 	created_at?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
 	email?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	first_name?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
-	id?: ResolverInputTypes["uuid_comparison_exp"] | undefined | null,
+	id?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	last_name?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	phone?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	picture_url?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
@@ -1446,7 +1432,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Profile_select_column"]> | undefi
 	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
 	email?: string | undefined | null,
 	first_name?: string | undefined | null,
-	id?: ResolverInputTypes["uuid"] | undefined | null,
+	id?: string | undefined | null,
 	last_name?: string | undefined | null,
 	phone?: string | undefined | null,
 	picture_url?: string | undefined | null,
@@ -1503,7 +1489,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Profile_select_column"]> | undefi
 };
 	/** primary key columns input for table: Profile */
 ["Profile_pk_columns_input"]: {
-	id: ResolverInputTypes["uuid"]
+	id: string
 };
 	/** select columns of table "Profile" */
 ["Profile_select_column"]:Profile_select_column;
@@ -1512,7 +1498,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Profile_select_column"]> | undefi
 	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
 	email?: string | undefined | null,
 	first_name?: string | undefined | null,
-	id?: ResolverInputTypes["uuid"] | undefined | null,
+	id?: string | undefined | null,
 	last_name?: string | undefined | null,
 	phone?: string | undefined | null,
 	picture_url?: string | undefined | null,
@@ -1530,7 +1516,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Profile_select_column"]> | undefi
 	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
 	email?: string | undefined | null,
 	first_name?: string | undefined | null,
-	id?: ResolverInputTypes["uuid"] | undefined | null,
+	id?: string | undefined | null,
 	last_name?: string | undefined | null,
 	phone?: string | undefined | null,
 	picture_url?: string | undefined | null,
@@ -1780,7 +1766,7 @@ count?: [{	columns?: Array<ResolverInputTypes["_prisma_migrations_select_column"
 ["mutation_root"]: AliasType<{
 delete_Profile?: [{	/** filter the rows which have to be deleted */
 	where: ResolverInputTypes["Profile_bool_exp"]},ResolverInputTypes["Profile_mutation_response"]],
-delete_Profile_by_pk?: [{	id: ResolverInputTypes["uuid"]},ResolverInputTypes["Profile"]],
+delete_Profile_by_pk?: [{	id: string},ResolverInputTypes["Profile"]],
 delete__prisma_migrations?: [{	/** filter the rows which have to be deleted */
 	where: ResolverInputTypes["_prisma_migrations_bool_exp"]},ResolverInputTypes["_prisma_migrations_mutation_response"]],
 delete__prisma_migrations_by_pk?: [{	id: string},ResolverInputTypes["_prisma_migrations"]],
@@ -1829,7 +1815,7 @@ Profile_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null,	/** sort the rows by one or more columns */
 	order_by?: Array<ResolverInputTypes["Profile_order_by"]> | undefined | null,	/** filter the rows returned */
 	where?: ResolverInputTypes["Profile_bool_exp"] | undefined | null},ResolverInputTypes["Profile_aggregate"]],
-Profile_by_pk?: [{	id: ResolverInputTypes["uuid"]},ResolverInputTypes["Profile"]],
+Profile_by_pk?: [{	id: string},ResolverInputTypes["Profile"]],
 _prisma_migrations?: [{	/** distinct select on columns */
 	distinct_on?: Array<ResolverInputTypes["_prisma_migrations_select_column"]> | undefined | null,	/** limit the number of rows returned */
 	limit?: number | undefined | null,	/** skip the first n rows. Use only with order_by */
@@ -1858,7 +1844,7 @@ Profile_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null,	/** sort the rows by one or more columns */
 	order_by?: Array<ResolverInputTypes["Profile_order_by"]> | undefined | null,	/** filter the rows returned */
 	where?: ResolverInputTypes["Profile_bool_exp"] | undefined | null},ResolverInputTypes["Profile_aggregate"]],
-Profile_by_pk?: [{	id: ResolverInputTypes["uuid"]},ResolverInputTypes["Profile"]],
+Profile_by_pk?: [{	id: string},ResolverInputTypes["Profile"]],
 Profile_stream?: [{	/** maximum number of rows returned in a single batch */
 	batch_size: number,	/** cursor to stream the results returned by the query */
 	cursor: Array<ResolverInputTypes["Profile_stream_cursor_input"] | undefined | null>,	/** filter the rows returned */
@@ -1907,19 +1893,6 @@ _prisma_migrations_stream?: [{	/** maximum number of rows returned in a single b
 	_lte?: ResolverInputTypes["timestamptz"] | undefined | null,
 	_neq?: ResolverInputTypes["timestamptz"] | undefined | null,
 	_nin?: Array<ResolverInputTypes["timestamptz"]> | undefined | null
-};
-	["uuid"]:unknown;
-	/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-["uuid_comparison_exp"]: {
-	_eq?: ResolverInputTypes["uuid"] | undefined | null,
-	_gt?: ResolverInputTypes["uuid"] | undefined | null,
-	_gte?: ResolverInputTypes["uuid"] | undefined | null,
-	_in?: Array<ResolverInputTypes["uuid"]> | undefined | null,
-	_is_null?: boolean | undefined | null,
-	_lt?: ResolverInputTypes["uuid"] | undefined | null,
-	_lte?: ResolverInputTypes["uuid"] | undefined | null,
-	_neq?: ResolverInputTypes["uuid"] | undefined | null,
-	_nin?: Array<ResolverInputTypes["uuid"]> | undefined | null
 }
   }
 
@@ -1946,7 +1919,7 @@ export type ModelTypes = {
 		created_at: ModelTypes["timestamp"],
 	email: string,
 	first_name?: string | undefined,
-	id: ModelTypes["uuid"],
+	id: string,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -1971,7 +1944,7 @@ export type ModelTypes = {
 	created_at?: ModelTypes["timestamp_comparison_exp"] | undefined,
 	email?: ModelTypes["String_comparison_exp"] | undefined,
 	first_name?: ModelTypes["String_comparison_exp"] | undefined,
-	id?: ModelTypes["uuid_comparison_exp"] | undefined,
+	id?: ModelTypes["String_comparison_exp"] | undefined,
 	last_name?: ModelTypes["String_comparison_exp"] | undefined,
 	phone?: ModelTypes["String_comparison_exp"] | undefined,
 	picture_url?: ModelTypes["String_comparison_exp"] | undefined,
@@ -1983,7 +1956,7 @@ export type ModelTypes = {
 	created_at?: ModelTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: ModelTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -1994,7 +1967,7 @@ export type ModelTypes = {
 		created_at?: ModelTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: ModelTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2005,7 +1978,7 @@ export type ModelTypes = {
 		created_at?: ModelTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: ModelTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2037,7 +2010,7 @@ export type ModelTypes = {
 };
 	/** primary key columns input for table: Profile */
 ["Profile_pk_columns_input"]: {
-	id: ModelTypes["uuid"]
+	id: string
 };
 	["Profile_select_column"]:Profile_select_column;
 	/** input type for updating data in table "Profile" */
@@ -2045,7 +2018,7 @@ export type ModelTypes = {
 	created_at?: ModelTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: ModelTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2063,7 +2036,7 @@ export type ModelTypes = {
 	created_at?: ModelTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: ModelTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2379,19 +2352,6 @@ export type ModelTypes = {
 	_lte?: ModelTypes["timestamptz"] | undefined,
 	_neq?: ModelTypes["timestamptz"] | undefined,
 	_nin?: Array<ModelTypes["timestamptz"]> | undefined
-};
-	["uuid"]:any;
-	/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-["uuid_comparison_exp"]: {
-	_eq?: ModelTypes["uuid"] | undefined,
-	_gt?: ModelTypes["uuid"] | undefined,
-	_gte?: ModelTypes["uuid"] | undefined,
-	_in?: Array<ModelTypes["uuid"]> | undefined,
-	_is_null?: boolean | undefined,
-	_lt?: ModelTypes["uuid"] | undefined,
-	_lte?: ModelTypes["uuid"] | undefined,
-	_neq?: ModelTypes["uuid"] | undefined,
-	_nin?: Array<ModelTypes["uuid"]> | undefined
 }
     }
 
@@ -2414,7 +2374,7 @@ export type GraphQLTypes = {
 	created_at: GraphQLTypes["timestamp"],
 	email: string,
 	first_name?: string | undefined,
-	id: GraphQLTypes["uuid"],
+	id: string,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2441,7 +2401,7 @@ export type GraphQLTypes = {
 	created_at?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
 	email?: GraphQLTypes["String_comparison_exp"] | undefined,
 	first_name?: GraphQLTypes["String_comparison_exp"] | undefined,
-	id?: GraphQLTypes["uuid_comparison_exp"] | undefined,
+	id?: GraphQLTypes["String_comparison_exp"] | undefined,
 	last_name?: GraphQLTypes["String_comparison_exp"] | undefined,
 	phone?: GraphQLTypes["String_comparison_exp"] | undefined,
 	picture_url?: GraphQLTypes["String_comparison_exp"] | undefined,
@@ -2454,7 +2414,7 @@ export type GraphQLTypes = {
 		created_at?: GraphQLTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: GraphQLTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2466,7 +2426,7 @@ export type GraphQLTypes = {
 	created_at?: GraphQLTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: GraphQLTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2478,7 +2438,7 @@ export type GraphQLTypes = {
 	created_at?: GraphQLTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: GraphQLTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2511,7 +2471,7 @@ export type GraphQLTypes = {
 };
 	/** primary key columns input for table: Profile */
 ["Profile_pk_columns_input"]: {
-		id: GraphQLTypes["uuid"]
+		id: string
 };
 	/** select columns of table "Profile" */
 ["Profile_select_column"]: Profile_select_column;
@@ -2520,7 +2480,7 @@ export type GraphQLTypes = {
 		created_at?: GraphQLTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: GraphQLTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2538,7 +2498,7 @@ export type GraphQLTypes = {
 		created_at?: GraphQLTypes["timestamp"] | undefined,
 	email?: string | undefined,
 	first_name?: string | undefined,
-	id?: GraphQLTypes["uuid"] | undefined,
+	id?: string | undefined,
 	last_name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
@@ -2877,19 +2837,6 @@ export type GraphQLTypes = {
 	_lte?: GraphQLTypes["timestamptz"] | undefined,
 	_neq?: GraphQLTypes["timestamptz"] | undefined,
 	_nin?: Array<GraphQLTypes["timestamptz"]> | undefined
-};
-	["uuid"]: "scalar" & { name: "uuid" };
-	/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-["uuid_comparison_exp"]: {
-		_eq?: GraphQLTypes["uuid"] | undefined,
-	_gt?: GraphQLTypes["uuid"] | undefined,
-	_gte?: GraphQLTypes["uuid"] | undefined,
-	_in?: Array<GraphQLTypes["uuid"]> | undefined,
-	_is_null?: boolean | undefined,
-	_lt?: GraphQLTypes["uuid"] | undefined,
-	_lte?: GraphQLTypes["uuid"] | undefined,
-	_neq?: GraphQLTypes["uuid"] | undefined,
-	_nin?: Array<GraphQLTypes["uuid"]> | undefined
 }
     }
 /** unique or primary key constraints on table "Profile" */
@@ -2994,6 +2941,4 @@ type ZEUS_VARIABLES = {
 	["timestamp_comparison_exp"]: ValueTypes["timestamp_comparison_exp"];
 	["timestamptz"]: ValueTypes["timestamptz"];
 	["timestamptz_comparison_exp"]: ValueTypes["timestamptz_comparison_exp"];
-	["uuid"]: ValueTypes["uuid"];
-	["uuid_comparison_exp"]: ValueTypes["uuid_comparison_exp"];
 }
