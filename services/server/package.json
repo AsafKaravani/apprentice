@@ -7,9 +7,11 @@
 	"license": "UNLICENSED",
 	"scripts": {
 		"build": "nest build",
+		"docker-build": "sh ./scripts/docker-build.sh",
+		"docker-start": "sh ./scripts/docker-start.sh",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"start": "node dist/main",
-		"dev": "dotenv -e ../../.env.local nest start --watch",
+		"dev": "dotenv -e ../../.env.local -- \"nest start --watch\"",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
