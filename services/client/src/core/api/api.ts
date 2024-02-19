@@ -48,8 +48,7 @@ export const useMutation_CreateProfile = () => {
 			return chain('mutation', { scalars })({
 				insert_Profile_one: [{
 					object: {
-						...toInput(profile),
-						email: user!.email
+						...toInput(profile)
 					}
 				}, {
 					id: true
@@ -74,8 +73,7 @@ export const useMutation_UpdateProfile = () => {
 						email: { _eq: user!.email }
 					},
 					_set: {
-						...profile,
-						email: user!.email
+						...profile
 					}
 				}, {
 					affected_rows: true,

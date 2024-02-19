@@ -10,6 +10,7 @@ export const ProfileButton: FC = () => {
 	const [logout] = useLogout();
 
 	const [user] = useAuth();
+	
 	const query_Profile = useQuery_Profile();
 	const profile = query_Profile.data?.Profile[0];
 

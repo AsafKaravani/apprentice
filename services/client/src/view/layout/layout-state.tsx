@@ -2,11 +2,15 @@ import { atom, selector } from 'recoil';
 
 type LayoutState = {
 	isMenuOpen?: boolean;
+	showProfileMenu?: boolean;
+	showMenuButton?: boolean;
 };
 const state = atom<LayoutState>({
 	key: 'baseLayoutState',
 	default: {
-		isMenuOpen: false
+		isMenuOpen: false,
+		showProfileMenu: true,
+		showMenuButton: true,
 	}
 });
 

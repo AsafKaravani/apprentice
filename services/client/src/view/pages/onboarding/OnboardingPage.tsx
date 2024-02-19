@@ -9,12 +9,16 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { ProfileForm } from './ProfileForm';
 import { useNavigate } from 'react-router-dom';
 import { useDevice } from '../../layout/useDevice';
+import { useRecoilState } from 'recoil';
+import { atom_layoutState } from '../../layout/layout-state';
 
 export const OnboardingPage: FC = React.memo(() => {
 	const swiperRef = React.useRef<SwiperType | null>(null);
 	const navigate = useNavigate();
 	useCreateProfileIfNoProfile();
 	const device = useDevice();
+	const [layoutState, setLayoutState] = useRecoilState(atom_layoutState);
+
 	return (
 		<div className="onboarding-page flex items-center flex-col h-full py-4 w-screen overflow-hidden">
 			<div className=" flex justify-center w-full h-5/6 lg:h-1/2 mt-4">

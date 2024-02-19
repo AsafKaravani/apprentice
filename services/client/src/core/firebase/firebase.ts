@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, User, UserCredential } from 'firebase/auth';
 import { getStorage, ref, deleteObject, getDownloadURL, StorageReference } from 'firebase/storage';
 
 import {
@@ -11,6 +11,7 @@ import {
 	useSignInWithGoogle,
 	useSignOut
 } from 'react-firebase-hooks/auth';
+import { AuthActionHook } from 'react-firebase-hooks/auth/dist/auth/types';
 import { useDownloadURL, useUploadFile } from 'react-firebase-hooks/storage';
 
 import { useNavigate } from 'react-router-dom';
@@ -30,13 +31,42 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebaseApp);
 export const storage = getStorage(firebaseApp);
 
-export const useAuth = () => useAuthState(firebaseAuth);
+declare global {
+    interface Window {
+        __JWT__: string | undefined;
+    }
+}
+
+function registerJwtToWindow(user?: UserCredential['user'] | null) {
+	if (!user) return;
+	user?.getIdToken().then(token => {
+		window.__JWT__ = token;
+	});
+}
+export const useAuth = () => {
+	const data = useAuthState(firebaseAuth);
+	registerJwtToWindow(data[0]);
+	return data;
+};
+
 export const useAuthId = () => {
 	const [user] = useAuth();
 	return user?.uid ? sdbm(user?.uid) : undefined;
 };
-export const useSignInGoogle = () => useSignInWithGoogle(firebaseAuth);
-export const useSignInPassword = () => useSignInWithEmailAndPassword(firebaseAuth);
+
+export const useSignInGoogle = () => {
+	const signInWithGoogle = useSignInWithGoogle(firebaseAuth);
+	registerJwtToWindow(signInWithGoogle[1]?.user);
+	return signInWithGoogle;
+};
+
+export const useSignInPassword = () => {
+	const signInWithEmailAndPassword = useSignInWithEmailAndPassword(firebaseAuth);
+	registerJwtToWindow(signInWithEmailAndPassword[1]?.user);
+	return signInWithEmailAndPassword;
+
+};
+
 export const useCreateUser = () => useCreateUserWithEmailAndPassword(firebaseAuth);
 export const useLogout = () => {
 	const [signOut, loading, error] = useSignOut(firebaseAuth);

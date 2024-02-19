@@ -55,8 +55,14 @@ export const ProfileForm: FC<ProfileFormProps> = React.memo(props => {
 			toast.error('Phone is required');
 			valid = false;
 		}
-
-		if (valid) mutation_UpdateProfile.mutate(values);
+		// remove nulls
+		const cleanValues = Object.fromEntries(Object.entries(values).filter(([_, v]) => v !== null));
+		delete cleanValues.updated_at;
+		delete cleanValues.created_at;
+		delete cleanValues.id;
+		delete cleanValues.email;
+		
+		if (valid) mutation_UpdateProfile.mutate(cleanValues);
 	};
 
 	useEffect(() => {

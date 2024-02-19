@@ -1,3 +1,4 @@
+import React from 'react';
 import { Chain, Thunder, ZeusScalars } from './index';
 
 
@@ -27,13 +28,32 @@ export const scalars: any = ZeusScalars({
 
 const removeQuotesFromKeys = (stringifiedJson: string) => stringifiedJson.replace(/"([^"]+)":/g, '$1:');
 
+// wait for the JWT to be set and stop after 10 seconds
+const waitForJwt = new Promise<void>((resolve, reject) => {
+	let count = 0;
+	const interval = setInterval(() => {
+		if (window.__JWT__) {
+			clearInterval(interval);
+			resolve();
+		} else if (count >= 100) {
+			clearInterval(interval);
+			reject('JWT not set');
+		}
+		count++;
+	}, 100);
+});
+
 export const chain = Thunder(async (query) => {
+	if (!window.__JWT__)
+		await waitForJwt;
+	
 	const response = await fetch(
 		import.meta.env.VITE_HASURA_GQL_ENDPOINT,
 		{
 			body: JSON.stringify({ query }),
 			method: 'POST',
 			headers: {
+				'Authorization': `Bearer ${window.__JWT__}`,
 			},
 		},
 	);
