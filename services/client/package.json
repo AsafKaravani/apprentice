@@ -8,7 +8,8 @@
 		"build": "tsc && vite build",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "dotenv -e ../../.env.local vite build && dotenv -e ../../.env.local vite preview",
-		"zeus": "dotenv -e ../../.env.local sh ./scripts/zeus.sh"
+		"zeus": "dotenv -e ../../.env.local sh ./scripts/zeus.sh",
+		"apply": "dotenv -e ../../.env.local sh ./scripts/apply.sh"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.1",

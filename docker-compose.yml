@@ -1,0 +1,43 @@
+version: '1.0'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    env_file:
+      - .env.local
+
+  graphql-engine:
+    image: hasura/graphql-engine:v2.37.0
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - .env.local
+    depends_on:
+      - postgres
+      - data-connector-agent
+
+  data-connector-agent:
+    image: hasura/graphql-data-connector:v2.37.0
+    restart: always
+    ports:
+      - 8081:8081
+    env_file:
+      - .env.local
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8081/api/v1/athena/health"
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 5s

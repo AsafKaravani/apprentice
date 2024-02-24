@@ -36,6 +36,17 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
 	},
-
-
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"docker.commands.composeUp": [
+		{
+			"label": "Compose Up",
+			"template": "${composeCommand} ${configurationFile} up ${detached} ${build} && sh ./postcompose.sh"
+		}
+	],
+	"[dockercompose]": {
+		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
+	}
 }
