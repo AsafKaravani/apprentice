@@ -1,6 +1,5 @@
 def tagBuild() {
-	script {
-    // Get the current build number from environment variable
+	// Get the current build number from environment variable
     def buildNumber = env.BUILD_NUMBER
     // Get the current commit hash
     def commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
@@ -17,5 +16,4 @@ def tagBuild() {
     
     // Push the tag to the remote repository
     sh "git push origin \"✔build_${buildNumber}\""
-	}
 }
