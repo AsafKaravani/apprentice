@@ -1,6 +1,6 @@
 def lib
 
-node('Built-In Node') {
+node('worker') {
   stage('Checkout') {
     checkout scm
   }
