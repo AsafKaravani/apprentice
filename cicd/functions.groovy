@@ -1,4 +1,4 @@
-def tagBuild() {
+def tagBuild() { 	
 	// Get the current build number from environment variable
     def buildNumber = env.BUILD_NUMBER
     // Get the current commit hash
@@ -17,3 +17,5 @@ def tagBuild() {
     // Push the tag to the remote repository
     sh "git push origin \"✔build_${buildNumber}\""
 }
+
+return this
