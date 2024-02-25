@@ -1,38 +1,42 @@
 pipeline {
-		agent any
-		stages {
-				stage('Env Variables') {
-						steps {
-								
-								sh 'printenv'
-						}
-				}
-				stage('Build') {
-					parallel {
+        agent any
+        stages {
+                stage('Env Variables') {
+                        steps {
+                                
+                                sh 'printenv'
+                        }
+                }
+                stage('Build') {
+                    parallel {
                 stage('Client') {
-                     echo 'Building client...'
+                     steps {
+                                                echo 'Client...'
+                                         } 
                 }
                 stage('Server') {
-                     echo 'Building server...'
+                     steps {
+                                                echo 'Server...'
+                                        }
                 }
             }
-				}
-				stage('Tagging') {
+                }
+                stage('Tagging') {
             steps {
-							script {
+                            script {
                 load("cicd/functions.groovy").tagBuild()
-							}
+                            }
             }
         }
-				stage('Test') {
-						steps {
-								echo 'Testing...'
-						}
-				}
-				stage('Deploy') {
-						steps {
-								echo 'Deploying....'
-						}
-				}
-		}
+                stage('Test') {
+                        steps {
+                                echo 'Testing...'
+                        }
+                }
+                stage('Deploy') {
+                        steps {
+                                echo 'Deploying....'
+                        }
+                }
+        }
 }
