@@ -1,8 +1,8 @@
 
 pipeline {
-		def functions = load("cicd/functions.groovy")
 		agent any
 		stages {
+				def functions = load("cicd/functions.groovy")
 				stage('Env Variables') {
 						steps {
 								sh 'printenv'
