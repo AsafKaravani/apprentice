@@ -23,7 +23,7 @@ pipeline {
 										sh "git config --global user.name jenkins-bot"
 										sh '''
 											git config --global user.password "${GIT_PASSWORD}"
-											git remote set-url origin ${GIT_URL}"
+											git remote set-url origin "${GIT_URL}"
 											'''
                     // Tag the commit with the build number
                     sh "git tag -a build_${buildNumber} -m 'Build ${buildNumber}' ${commitHash}"
