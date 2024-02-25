@@ -1,4 +1,4 @@
-call() {
+def call() {
 	// Get the current build number from environment variable
     def buildNumber = env.BUILD_NUMBER
     // Get the current commit hash

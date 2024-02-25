@@ -15,7 +15,7 @@ pipeline {
 				stage('Tagging') {
             steps {
 							script {
-                def tagAndPush = load './cicd/functions.groovy'
+                def tagAndPush = load './cicd/functions.groovy'.tagAndPush
 								tagAndPush()
 							}
             }
