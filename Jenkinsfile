@@ -3,7 +3,10 @@ pipeline {
 		stages {
 				stage('Build') {
 						steps {
-								echo 'Building...'
+								echo 'Building... ${BUILD_NUMBER}'
+								echo 'Building... $BUILD_NUMBER'
+								echo 'Building... ${PG_HOST}'
+								echo 'Building... $PG_HOST'
 						}
 				}
 				stage('Test') {
