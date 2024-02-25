@@ -12,5 +12,17 @@ node('worker') {
   stage('Execute') {
     lib.tagBuild()
   }
+
+	parallel() {
+		stage('1') {
+     	sh 'echo "1"'
+  	}
+		stage('2') {
+		 	sh 'echo "2"'
+		}
+		stage('3') {
+		 	sh 'echo "3"'
+		}
+	}
 }
 
