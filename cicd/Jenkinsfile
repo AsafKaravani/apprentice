@@ -1,36 +1,16 @@
+def lib
 
-def functions
+node('Built-In Node') {
+  stage('Checkout') {
+    checkout scm
+  }
 
-pipeline {
-		agent any
-		stages {
-				stage('Env Variables') {
-						steps {
-							functions = load("cicd/functions.groovy")
-								sh 'printenv'
-						}
-				}
-				stage('Build') {
-						steps {
-								echo 'Building...'
-						}
-				}
-				stage('Tagging') {
-            steps {
-							script {
-                functions.tagBuild()
-							}
-            }
-        }
-				stage('Test') {
-						steps {
-								echo 'Testing...'
-						}
-				}
-				stage('Deploy') {
-						steps {
-								echo 'Deploying....'
-						}
-				}
-		}
+  stage('Load') {
+    lib = load 'cicd/functions.groovy'
+  }
+
+  stage('Execute') {
+    lib.tagBuild()
+  }
 }
+
