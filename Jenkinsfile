@@ -25,7 +25,7 @@ pipeline {
 											git remote set-url origin "https://asafkaravani:${GIT_PASSWORD}@github.com/asafkaravani/apprentice.git"
 											'''
                     // Tag the commit with the build number
-                    sh "git tag -a build_${buildNumber} -m 'Build ${buildNumber}' ${commitHash}"
+                    sh "git tag -a \"✔build_${buildNumber}\" -m 'Build ${buildNumber}' ${commitHash}"
                     // Push the tag to the remote repository
                     sh "git push origin \"✔build_${buildNumber}\""
                 }
