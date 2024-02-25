@@ -1,6 +1,6 @@
 
-def functions = load("cicd/functions.groovy")
 pipeline {
+		def functions = load("cicd/functions.groovy")
 		agent any
 		stages {
 				stage('Env Variables') {
