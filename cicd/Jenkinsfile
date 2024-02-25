@@ -15,7 +15,8 @@ pipeline {
 				}
 				stage('Tagging') {
             steps {
-                tagBuild()
+                def tagAndPush = load './tagAndPushBuild.groovy'
+								tagAndPush()
             }
         }
 				stage('Test') {
