@@ -1,5 +1,5 @@
 
-
+def functions = load("cicd/functions.groovy")
 pipeline {
 		agent any
 		stages {
@@ -16,7 +16,7 @@ pipeline {
 				stage('Tagging') {
             steps {
 							script {
-                load("cicd/functions.groovy").tagBuild()
+                functions.tagBuild()
 							}
             }
         }
