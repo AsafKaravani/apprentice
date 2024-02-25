@@ -2,7 +2,6 @@
 pipeline {
 		agent any
 		stages {
-				def functions = load("cicd/functions.groovy")
 				stage('Env Variables') {
 						steps {
 								sh 'printenv'
@@ -16,6 +15,8 @@ pipeline {
 				stage('Tagging') {
             steps {
 							script {
+								def functions = load("cicd/functions.groovy")
+
                 functions.tagBuild()
 							}
             }
