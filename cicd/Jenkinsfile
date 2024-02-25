@@ -9,9 +9,6 @@ node('worker') {
     lib = load 'cicd/functions.groovy'
   }
 
-  stage('Execute') {
-    lib.tagBuild()
-  }
 
 	stage('Tag') {
 		lib.tagBuild()
