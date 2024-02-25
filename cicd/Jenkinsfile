@@ -10,19 +10,22 @@ node('worker') {
   }
 
   stage('Execute') {
-    lib.tagBuild()
+    steps {
+    parallel(
+      a: {
+        echo "This is branch a"
+      },
+      b: {
+        echo "This is branch b"
+      }
+    )
+  }
   }
 
-	parallel() {
-		stage('1') {
-     	sh 'echo "1"'
-  	}
-		stage('2') {
-		 	sh 'echo "2"'
-		}
-		stage('3') {
-		 	sh 'echo "3"'
-		}
+	stage('Tag') {
+		lib.tagBuild()
 	}
+
+
 }
 
