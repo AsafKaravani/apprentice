@@ -1,12 +1,14 @@
 pipeline {
 		agent any
 		stages {
+				stage('Env Variables') {
+						steps {
+								sh 'printenv'
+						}
+				}
 				stage('Build') {
 						steps {
-								echo 'Building... ${BUILD_NUMBER}'
-								echo 'Building... $BUILD_NUMBER'
-								echo 'Building... ${PG_HOST}'
-								echo 'Building... $PG_HOST'
+								echo 'Building...'
 						}
 				}
 				stage('Test') {
