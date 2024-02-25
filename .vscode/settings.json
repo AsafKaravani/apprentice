@@ -43,7 +43,7 @@
 	"docker.commands.composeUp": [
 		{
 			"label": "Compose Up",
-			"template": "${composeCommand} ${configurationFile} up ${detached} ${build} && sh ./postcompose.sh"
+			"template": "${composeCommand} ${configurationFile} up ${detached} ${build} && sh ./docker-compose.sh"
 		}
 	],
 	"[dockercompose]": {

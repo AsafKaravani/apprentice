@@ -1,0 +1,32 @@
+@Library('./functions.groovy')
+
+pipeline {
+		agent any
+		stages {
+				stage('Env Variables') {
+						steps {
+								sh 'printenv'
+						}
+				}
+				stage('Build') {
+						steps {
+								echo 'Building...'
+						}
+				}
+				stage('Tagging') {
+            steps {
+                tagBuild()
+            }
+        }
+				stage('Test') {
+						steps {
+								echo 'Testing...'
+						}
+				}
+				stage('Deploy') {
+						steps {
+								echo 'Deploying....'
+						}
+				}
+		}
+}
