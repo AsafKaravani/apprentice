@@ -5,7 +5,6 @@ pipeline {
         stage('Build') {
             parallel {
                 stage('Server') {
-                    agent { label 'server' }
                     stages {
                         stage('Lint Server') {
                             steps {
@@ -38,7 +37,6 @@ pipeline {
                     }
                 }
                 stage('Client') {
-                    agent { label 'client' }
                     stages {
                         stage('Lint Client') {
                             steps {
