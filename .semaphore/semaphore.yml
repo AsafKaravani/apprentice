@@ -11,8 +11,9 @@ blocks:
         - name: checkout
           commands:
             - checkout
-        - name: 'Job #4'
-          commands: []
+        - name: echo $FOO_1
+          commands:
+            - echo $FOO_1
         - name: lint
           commands:
             - echo lint
