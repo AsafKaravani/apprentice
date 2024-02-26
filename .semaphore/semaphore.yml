@@ -5,38 +5,29 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: checkout
+  - name: Checkout
     task:
       jobs:
         - name: checkout
           commands:
             - checkout
-        - name: echo $FOO_1
-          commands:
-            - echo $FOO_1
-        - name: lint
-          commands:
-            - echo lint
-        - name: yarn install
-          commands:
-            - echo install
       env_vars:
         - name: FOO_1
           value: BAR_1
     dependencies: []
-  - name: Client
+  - name: Lint
     dependencies:
-      - checkout
+      - Checkout
     task:
       jobs:
         - name: lint
           commands:
-            - echo $FOO_1
-  - name: Server
+            - echo lint
+  - name: 'Block #3'
     dependencies:
-      - checkout
+      - Lint
     task:
       jobs:
-        - name: lint
+        - name: ls
           commands:
             - ls
