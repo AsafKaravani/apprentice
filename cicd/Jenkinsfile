@@ -1,42 +1,76 @@
 pipeline {
-        agent any
-        stages {
-                stage('Env Variables') {
-                        steps {
-                                
-                                sh 'printenv'
-                        }
-                }
-                stage('Build') {
-                    parallel {
-                stage('Client') {
-                     steps {
-                                                echo 'Client...'
-                                         } 
-                }
+    agent any
+
+    stages {
+        stage('Build') {
+            parallel {
                 stage('Server') {
-                     steps {
-                                                echo 'Server...'
-                                        }
-                }
-            }
-                }
-                stage('Tagging') {
-            steps {
-                            script {
-                load("cicd/functions.groovy").tagBuild()
+                    agent { label 'server' }
+                    stages {
+                        stage('Lint Server') {
+                            steps {
+                                echo 'Linting server...'
+                                // Insert your linting command/script for server
+                                // e.g., sh './lint-server.sh'
                             }
+                        }
+                        stage('Test Server') {
+                            steps {
+                                echo 'Testing server...'
+                                // Insert your testing command/script for server
+                                // e.g., sh './test-server.sh'
+                            }
+                        }
+                        stage('Deploy Server') {
+                            steps {
+                                echo 'Deploying server...'
+                                // Insert your deployment command/script for server
+                                // e.g., sh './deploy-server.sh'
+                            }
+                        }
+                        stage('Test Server Deployment') {
+                            steps {
+                                echo 'Testing server deployment...'
+                                // Insert your post-deployment testing command/script for server
+                                // e.g., sh './test-server-deployment.sh'
+                            }
+                        }
+                    }
+                }
+                stage('Client') {
+                    agent { label 'client' }
+                    stages {
+                        stage('Lint Client') {
+                            steps {
+                                echo 'Linting client...'
+                                // Insert your linting command/script for client
+                                // e.g., sh './lint-client.sh'
+                            }
+                        }
+                        stage('Test Client') {
+                            steps {
+                                echo 'Testing client...'
+                                // Insert your testing command/script for client
+                                // e.g., sh './test-client.sh'
+                            }
+                        }
+                        stage('Deploy Client') {
+                            steps {
+                                echo 'Deploying client...'
+                                // Insert your deployment command/script for client
+                                // e.g., sh './deploy-client.sh'
+                            }
+                        }
+                        stage('Test Client Deployment') {
+                            steps {
+                                echo 'Testing client deployment...'
+                                // Insert your post-deployment testing command/script for client
+                                // e.g., sh './test-client-deployment.sh'
+                            }
+                        }
+                    }
+                }
             }
         }
-                stage('Test') {
-                        steps {
-                                echo 'Testing...'
-                        }
-                }
-                stage('Deploy') {
-                        steps {
-                                echo 'Deploying....'
-                        }
-                }
-        }
+    }
 }
