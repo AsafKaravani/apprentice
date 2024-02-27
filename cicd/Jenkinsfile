@@ -4,12 +4,12 @@ pipeline {
 				stage('Install Yarn') {
             steps {
                 script {
-                    // Check if Yarn is installed and install it if not
-                    sh 'which yarn || curl -o- -L https://yarnpkg.com/install.sh | sh'
-                    // Optionally, add Yarn to PATH if not already configured globally
-                    sh 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"'
-
-										sh 'yarn --version'
+                     // Install Yarn for Debian/Ubuntu
+                    sh 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -'
+                    sh 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list'
+                    sh 'sudo apt-get update && sudo apt-get install yarn'
+                    // Verify Yarn installation
+                    sh 'yarn --version'
                 }
             }
         }
