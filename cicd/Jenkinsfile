@@ -4,28 +4,24 @@ pipeline {
         stage('Services') {
             parallel {
                 stage('Server') {
-										when { expression { load("cicd/functions.groovy").checkChanges('services/server') } }
                     stages {
                         stage('Pre Build') { steps { sh 'bash services/server/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'bash services/server/scripts/build.sh' } }
                     }
                 }
                 stage('Client') {
-										when { expression { load("cicd/functions.groovy").checkChanges('services/client') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/client/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/client/scripts/build.sh' } }
                     }
                 }
 								stage('Hasura') {
-										when { expression { load("cicd/functions.groovy").checkChanges('services/hasura') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/hasura/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/hasura/scripts/build.sh' } }
                     }
                 }
 								stage('DB') {
-										when { expression { load("cicd/functions.groovy").checkChanges('services/db') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/db/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/db/scripts/build.sh' } }
