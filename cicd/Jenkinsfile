@@ -4,6 +4,11 @@ pipeline {
         stage('Services') {
             parallel {
                 stage('Server') {
+										when {
+												expression {
+														return load('cicd/hasChanges.groovy')('services/server')
+												}
+										}
                     stages {
                         stage('Lint Server') {
                             steps {
@@ -36,6 +41,11 @@ pipeline {
                     }
                 }
                 stage('Client') {
+										when {
+												expression {
+														return load('cicd/hasChanges.groovy')('client/server')
+												}
+										}
                     stages {
                         stage('Lint Client') {
                             steps {
