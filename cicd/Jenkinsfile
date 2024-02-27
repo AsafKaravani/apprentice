@@ -1,5 +1,7 @@
 pipeline {
-    agent node20
+    agent {
+			label 'node20'
+		}
     stages {
 				stage('Install Packages') {
 						steps {
