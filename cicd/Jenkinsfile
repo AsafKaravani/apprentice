@@ -6,7 +6,8 @@ pipeline {
                 stage('Server') {
 										when {
 												expression {
-														return load('cicd/hasChanges.groovy')('services/server')
+														def hasChanges = load 'cicd/hasChanges.groovy'
+                            return hasChanges('services/server')
 												}
 										}
                     stages {
@@ -43,7 +44,8 @@ pipeline {
                 stage('Client') {
 										when {
 												expression {
-														return load('cicd/hasChanges.groovy')('services/client')
+														def hasChanges = load 'cicd/hasChanges.groovy'
+                            return hasChanges('services/client')
 												}
 										}
                     stages {
@@ -79,5 +81,10 @@ pipeline {
                 }
             }
         }
+				stage('Post Pipleline') {
+					steps {
+						echo 'Post Pipeline...'
+					}
+				}
     }
 }
