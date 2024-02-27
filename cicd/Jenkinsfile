@@ -22,8 +22,8 @@ pipeline {
                 }
                 stage('Client') {
                     stages {
-                        stage('Pre Build') { steps { sh 'bash services/client/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'bash services/client/scripts/build.sh' } }
+                        stage('Pre Build') { steps {  dir('services/client') { sh 'bash scripts/pre-build.sh' } } }
+												stage('Build') { steps {  dir('services/client') { sh 'bash scripts/build.sh' } } }
                     }
                 }
 								stage('Hasura') {
