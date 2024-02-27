@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker { image 'node:20.11.1-alpine3.19' }
-    }
+    agent node20
     stages {
 				stage('Install Packages') {
 						steps {
