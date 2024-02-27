@@ -1,34 +1,34 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${NAMESPACE}-hasura
+  name: hasura
   namespace: ${NAMESPACE}
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: ${NAMESPACE}-hasura
+    app: hasura
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${NAMESPACE}-hasura
+  name: hasura
   namespace: ${NAMESPACE}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${NAMESPACE}-hasura
+      app: hasura
   template:
     metadata:
       labels:
-        app: ${NAMESPACE}-hasura
+        app: hasura
     spec:
       containers:
-      - name: ${NAMESPACE}-hasura
+      - name: hasura
         image: hasura/graphql-engine:v2.36.0
         ports:
         - containerPort: 8080
