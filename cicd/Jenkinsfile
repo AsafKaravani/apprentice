@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-				stage('Yarn Install') {
+				stage('Install Packages') {
 						steps {
 								script {
 										// Install dependencies
