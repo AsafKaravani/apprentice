@@ -28,41 +28,21 @@ pipeline {
                 }
 								stage('Hasura') {
                     stages {
-                        stage('Pre Build') { steps { sh 'bash services/hasura/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'bash services/hasura/scripts/build.sh' } }
+                        stage('Pre Build') { steps {  dir('services/hasura') { sh 'bash scripts/pre-build.sh' } } }
+												stage('Build') { steps {  dir('services/hasura') { sh 'bash scripts/build.sh' } } }
                     }
                 }
 								stage('DB') {
                     stages {
-                        stage('Pre Build') { steps { sh 'bash services/db/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'bash services/db/scripts/build.sh' } }
+                        stage('Pre Build') { steps {  dir('services/db') { sh 'bash scripts/pre-build.sh' } } }
+												stage('Build') { steps {  dir('services/db') { sh 'bash scripts/build.sh' } } }
                     }
                 }
             }
         }
-				stage('Deploy Environment') {
-					parallel { 
-						stage('Changed Services') {
-								steps {
-										script {
-												def dirsList = load("cicd/functions.groovy").getChangedDirs()
-												for (dir in dirsList) {
-														echo "Changed directory: ${dir}"
-												}
-										}
-								}
-						}
-						stage('Not Changed Services') {
-								steps {
-										script {
-												def dirsList = load("cicd/functions.groovy").getNonChangedDirs()
-												for (dir in dirsList) {
-														echo "Changed directory: ${dir}"
-												}
-										}
-								}
-						}
-
+				stage('Deploy') {
+					steps {
+							sh 'bash k8s/deploy.sh'
 					}
 				}
 				stage('E2E Tests') {
