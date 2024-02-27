@@ -43,7 +43,7 @@ pipeline {
                 stage('Client') {
 										when {
 												expression {
-														return load('cicd/hasChanges.groovy')('client/server')
+														return load('cicd/hasChanges.groovy')('services/client')
 												}
 										}
                     stages {
