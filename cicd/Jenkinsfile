@@ -4,80 +4,39 @@ pipeline {
         stage('Services') {
             parallel {
                 stage('Server') {
-										def dir = 'services/server'
-										// when {
-										// 		expression {
-										// 				def hasChanges = load 'cicd/hasChanges.groovy'
-                    //         return hasChanges.checkChanges('services/server')
-										// 		}
-										// }
+										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/server') } }
                     stages {
-                        stage('Lint Server') {
-                            steps {
-                                echo 'Linting server... ${dir}'
-                                // Insert your linting command/script for server
-                                // e.g., sh './lint-server.sh'
-                            }
-                        }
-                        stage('Test Server') {
-                            steps {
-                                echo 'Testing server... ${dir}'
-                                // Insert your testing command/script for server
-                                // e.g., sh './test-server.sh'
-                            }
-                        }
-                        stage('Deploy Server') {
-                            steps {
-                                echo 'Deploying server...'
-                                // Insert your deployment command/script for server
-                                // e.g., sh './deploy-server.sh'
-                            }
-                        }
-                        stage('Test Server Deployment') {
-                            steps {
-                                echo 'Testing server deployment...'
-                                // Insert your post-deployment testing command/script for server
-                                // e.g., sh './test-server-deployment.sh'
-                            }
-                        }
+                        stage('Pre Build') { steps { sh 'services/server/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'services/server/scripts/build.sh' } }
+												stage('Deploy') { steps { sh 'services/server/scripts/deploy-test-env.sh' } }
+												stage('E2E Tests') { steps { sh 'services/server/scripts/e2e.sh' } }
                     }
                 }
                 stage('Client') {
-										// when {
-										// 		expression {
-										// 				def hasChanges = load 'cicd/hasChanges.groovy'
-                    //         return hasChanges.checkChanges('services/client')
-										// 		}
-										// }
+										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/client') } }
                     stages {
-                        stage('Lint Client') {
-                            steps {
-                                echo 'Linting client...'
-                                // Insert your linting command/script for client
-                                // e.g., sh './lint-client.sh'
-                            }
-                        }
-                        stage('Test Client') {
-                            steps {
-                                echo 'Testing client...'
-                                // Insert your testing command/script for client
-                                // e.g., sh './test-client.sh'
-                            }
-                        }
-                        stage('Deploy Client') {
-                            steps {
-                                echo 'Deploying client...'
-                                // Insert your deployment command/script for client
-                                // e.g., sh './deploy-client.sh'
-                            }
-                        }
-                        stage('Test Client Deployment') {
-                            steps {
-                                echo 'Testing client deployment...'
-                                // Insert your post-deployment testing command/script for client
-                                // e.g., sh './test-client-deployment.sh'
-                            }
-                        }
+                        stage('Pre Build') { steps { sh 'services/client/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'services/client/scripts/build.sh' } }
+												stage('Deploy') { steps { sh 'services/client/scripts/deploy-test-env.sh' } }
+												stage('E2E Tests') { steps { sh 'services/client/scripts/e2e.sh' } }
+                    }
+                }
+								stage('Hasura') {
+										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/hasura') } }
+                    stages {
+                        stage('Pre Build') { steps { sh 'services/hasura/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'services/hasura/scripts/build.sh' } }
+												stage('Deploy') { steps { sh 'services/hasura/scripts/deploy-test-env.sh' } }
+												stage('E2E Tests') { steps { sh 'services/hasura/scripts/e2e.sh' } }
+                    }
+                }
+								stage('DB') {
+										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/db') } }
+                    stages {
+                        stage('Pre Build') { steps { sh 'services/db/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'services/db/scripts/build.sh' } }
+												stage('Deploy') { steps { sh 'services/db/scripts/deploy-test-env.sh' } }
+												stage('E2E Tests') { steps { sh 'services/db/scripts/e2e.sh' } }
                     }
                 }
             }
