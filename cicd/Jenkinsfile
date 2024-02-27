@@ -7,7 +7,7 @@ pipeline {
 						steps {
 								script {
 										// Install dependencies
-										sh 'bash yarn install'
+										sh 'yarn install'
 								}
 						}
 				}
