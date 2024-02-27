@@ -4,27 +4,38 @@ pipeline {
         stage('Services') {
             parallel {
                 stage('Server') {
-										when {
-												expression {
-														def hasChanges = load 'cicd/hasChanges.groovy'
-                            return hasChanges.checkChanges('services/server')
-												}
-										}
+										// when {
+										// 		expression {
+										// 				def hasChanges = load 'cicd/hasChanges.groovy'
+                    //         return hasChanges.checkChanges('services/server')
+										// 		}
+										// }
                     stages {
-                        stage('Lint Server') {
+												parallel {
+													stage('Static Analysis') {
+														steps {
+															echo 'Running static analysis...'
+															// Insert your static analysis command/script for server
+															// e.g., sh './static-analysis-server.sh'
+														}
+													}
+													stage('Lint Server') {
                             steps {
                                 echo 'Linting server...'
                                 // Insert your linting command/script for server
                                 // e.g., sh './lint-server.sh'
                             }
-                        }
-                        stage('Test Server') {
+                        	}
+													stage('Unit Test Server') {
                             steps {
                                 echo 'Testing server...'
                                 // Insert your testing command/script for server
                                 // e.g., sh './test-server.sh'
                             }
                         }
+												}
+                        
+                        
                         stage('Deploy Server') {
                             steps {
                                 echo 'Deploying server...'
@@ -42,12 +53,12 @@ pipeline {
                     }
                 }
                 stage('Client') {
-										when {
-												expression {
-														def hasChanges = load 'cicd/hasChanges.groovy'
-                            return hasChanges.checkChanges('services/client')
-												}
-										}
+										// when {
+										// 		expression {
+										// 				def hasChanges = load 'cicd/hasChanges.groovy'
+                    //         return hasChanges.checkChanges('services/client')
+										// 		}
+										// }
                     stages {
                         stage('Lint Client') {
                             steps {
