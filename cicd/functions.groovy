@@ -18,4 +18,25 @@ def tagBuild() {
     sh "git push origin \"✔build_${buildNumber}\""
 }
 
+ // Function to get changed directories
+def getChangedDirs() {
+		def changedDirsOutput = sh(script: "git diff --name-only main...HEAD | grep '^services/' | cut -d'/' -f1-2 | sort -u", returnStdout: true).trim()
+		return changedDirsOutput.tokenize('\n')
+}
+
+// Function to get non-changed directories
+def getNonChangedDirs() {
+		// Dynamically generate the list of all directories under 'services'
+		def allDirsOutput = sh(script: "find services/ -type d -mindepth 1 -maxdepth 2 | sort -u", returnStdout: true).trim()
+		def allDirs = allDirsOutput.tokenize('\n')
+		def changedDirs = getChangedDirs()
+		return allDirs - changedDirs
+}
+
+// Function to check if there are changes in a specific directory
+def checkChanges(String directory) {
+    return sh(script: "git diff --quiet HEAD HEAD~ -- ${directory}/", returnStatus: true) != 0
+}
+
+
 return this

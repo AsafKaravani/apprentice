@@ -4,28 +4,28 @@ pipeline {
         stage('Services') {
             parallel {
                 stage('Server') {
-										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/server') } }
+										when { expression { load("cicd/functions.groovy").checkChanges('services/server') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/server/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/server/scripts/build.sh' } }
                     }
                 }
                 stage('Client') {
-										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/client') } }
+										when { expression { load("cicd/functions.groovy").checkChanges('services/client') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/client/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/client/scripts/build.sh' } }
                     }
                 }
 								stage('Hasura') {
-										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/hasura') } }
+										when { expression { load("cicd/functions.groovy").checkChanges('services/hasura') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/hasura/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/hasura/scripts/build.sh' } }
                     }
                 }
 								stage('DB') {
-										when { expression { load("cicd/hasChanges.groovy").checkChanges('services/db') } }
+										when { expression { load("cicd/functions.groovy").checkChanges('services/db') } }
                     stages {
                         stage('Pre Build') { steps { sh 'services/db/scripts/pre-build.sh' } }
 												stage('Build') { steps { sh 'services/db/scripts/build.sh' } }
@@ -34,8 +34,28 @@ pipeline {
             }
         }
 				stage('Deploy Environment') {
-					steps {
-						echo 'Deploying to production environment...'
+					parallel { 
+						stage('Changed Services') {
+								steps {
+										script {
+												def dirsList = load("cicd/functions.groovy").getChangedDirs()
+												for (dir in dirsList) {
+														echo "Changed directory: ${dir}"
+												}
+										}
+								}
+						}
+						stage('Not Changed Services') {
+								steps {
+										script {
+												def dirsList = load("cicd/functions.groovy").getNonChangedDirs()
+												for (dir in dirsList) {
+														echo "Changed directory: ${dir}"
+												}
+										}
+								}
+						}
+
 					}
 				}
 				stage('E2E Tests') {
