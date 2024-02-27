@@ -6,8 +6,8 @@ pipeline {
                 stage('Server') {
 										when { expression { load("cicd/functions.groovy").checkChanges('services/server') } }
                     stages {
-                        stage('Pre Build') { steps { sh 'services/server/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'services/server/scripts/build.sh' } }
+                        stage('Pre Build') { steps { sh 'bash services/server/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'bash services/server/scripts/build.sh' } }
                     }
                 }
                 stage('Client') {
