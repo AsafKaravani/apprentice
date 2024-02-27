@@ -1,48 +1,91 @@
 pipeline {
     agent any
-
     stages {
-        stage('Parallel Build and Test') {
-            steps {
-                script {
-                    // Define the components to loop through
-                    def components = ['server', 'client']
-                    def parallelStages = [:]
-
-                    // Loop through each component and prepare parallel stages
-                    components.each { component ->
-                        parallelStages["${component.toUpperCase()} Stages"] = {
-                            stage("${component.toUpperCase()} - Lint") {
-                                steps {
-                                    echo "Linting ${component}..."
-                                    // Your linting steps here
-                                }
+        stage('Services') {
+            parallel {
+                stage('Server') {
+										def dir = 'services/server'
+										// when {
+										// 		expression {
+										// 				def hasChanges = load 'cicd/hasChanges.groovy'
+                    //         return hasChanges.checkChanges('services/server')
+										// 		}
+										// }
+                    stages {
+                        stage('Lint Server') {
+                            steps {
+                                echo 'Linting server... ${dir}'
+                                // Insert your linting command/script for server
+                                // e.g., sh './lint-server.sh'
                             }
-                            stage("${component.toUpperCase()} - Test") {
-                                steps {
-                                    echo "Testing ${component}..."
-                                    // Your testing steps here
-                                }
+                        }
+                        stage('Test Server') {
+                            steps {
+                                echo 'Testing server... ${dir}'
+                                // Insert your testing command/script for server
+                                // e.g., sh './test-server.sh'
                             }
-                            stage("${component.toUpperCase()} - Deploy") {
-                                steps {
-                                    echo "Deploying ${component}..."
-                                    // Your deployment steps here
-                                }
+                        }
+                        stage('Deploy Server') {
+                            steps {
+                                echo 'Deploying server...'
+                                // Insert your deployment command/script for server
+                                // e.g., sh './deploy-server.sh'
                             }
-                            stage("${component.toUpperCase()} - Test Deployment") {
-                                steps {
-                                    echo "Test Deployment ${component}..."
-                                    // Your test deployment steps here
-                                }
+                        }
+                        stage('Test Server Deployment') {
+                            steps {
+                                echo 'Testing server deployment...'
+                                // Insert your post-deployment testing command/script for server
+                                // e.g., sh './test-server-deployment.sh'
                             }
                         }
                     }
-
-                    // Execute the prepared stages in parallel
-                    parallel parallelStages
+                }
+                stage('Client') {
+										// when {
+										// 		expression {
+										// 				def hasChanges = load 'cicd/hasChanges.groovy'
+                    //         return hasChanges.checkChanges('services/client')
+										// 		}
+										// }
+                    stages {
+                        stage('Lint Client') {
+                            steps {
+                                echo 'Linting client...'
+                                // Insert your linting command/script for client
+                                // e.g., sh './lint-client.sh'
+                            }
+                        }
+                        stage('Test Client') {
+                            steps {
+                                echo 'Testing client...'
+                                // Insert your testing command/script for client
+                                // e.g., sh './test-client.sh'
+                            }
+                        }
+                        stage('Deploy Client') {
+                            steps {
+                                echo 'Deploying client...'
+                                // Insert your deployment command/script for client
+                                // e.g., sh './deploy-client.sh'
+                            }
+                        }
+                        stage('Test Client Deployment') {
+                            steps {
+                                echo 'Testing client deployment...'
+                                // Insert your post-deployment testing command/script for client
+                                // e.g., sh './test-client-deployment.sh'
+                            }
+                        }
+                    }
                 }
             }
         }
+				stage('Post Pipleline') {
+					steps {
+						echo 'Post Pipeline...'
+					}
+				}
     }
 }
