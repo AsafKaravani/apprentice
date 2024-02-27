@@ -16,8 +16,8 @@ pipeline {
             parallel {
                 stage('Server') {
                     stages {
-                        stage('Pre Build') { steps { sh 'bash services/server/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'bash services/server/scripts/build.sh' } }
+                        stage('Pre Build') { steps {  dir('services/server') { sh 'bash scripts/pre-build.sh' } } }
+												stage('Build') { steps {  dir('services/server') { sh 'bash scripts/build.sh' } } }
                     }
                 }
                 stage('Client') {
