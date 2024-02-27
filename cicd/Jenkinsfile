@@ -11,20 +11,20 @@ pipeline {
                 }
                 stage('Client') {
                     stages {
-                        stage('Pre Build') { steps { sh 'services/client/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'services/client/scripts/build.sh' } }
+                        stage('Pre Build') { steps { sh 'bash services/client/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'bash services/client/scripts/build.sh' } }
                     }
                 }
 								stage('Hasura') {
                     stages {
-                        stage('Pre Build') { steps { sh 'services/hasura/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'services/hasura/scripts/build.sh' } }
+                        stage('Pre Build') { steps { sh 'bash services/hasura/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'bash services/hasura/scripts/build.sh' } }
                     }
                 }
 								stage('DB') {
                     stages {
-                        stage('Pre Build') { steps { sh 'services/db/scripts/pre-build.sh' } }
-												stage('Build') { steps { sh 'services/db/scripts/build.sh' } }
+                        stage('Pre Build') { steps { sh 'bash services/db/scripts/pre-build.sh' } }
+												stage('Build') { steps { sh 'bash services/db/scripts/build.sh' } }
                     }
                 }
             }
