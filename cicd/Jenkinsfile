@@ -11,6 +11,16 @@ pipeline {
                 }
             }
         }
+
+				stage('Yarn Install') {
+						steps {
+								script {
+										// Install dependencies
+										sh 'yarn install'
+								}
+						}
+				}
+				
         stage('Services') {
             parallel {
                 stage('Server') {
