@@ -43,7 +43,7 @@
 	"docker.commands.composeUp": [
 		{
 			"label": "Compose Up",
-			"template": "${composeCommand} ${configurationFile} up ${detached} ${build} && sh ./k8s/scripts/init-env.sh"
+			"template": "${composeCommand} ${configurationFile} up ${detached} ${build} && yarn dotenv -e .env.local sh ./k8s/scripts/init-env.sh"
 		}
 	],
 	"[dockercompose]": {
