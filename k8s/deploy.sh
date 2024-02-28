@@ -38,10 +38,12 @@ echo $KUBE_CONFIG | base64 --decode > decoded-kube-config.yaml
 export KUBECONFIG=decoded-kube-config.yaml
 
 # Now you can use kubectl commands directly
-kubectl delete persistentvolume ${NAMESPACE}-postgres-pv
 kubectl apply -f k8s/tmp/namespace.yaml
 kubectl apply -f k8s/tmp/config-map.yaml
 kubectl apply -f k8s/tmp
+
+echo "Restarting deployments... (This step is for existing environments to refresh images and environment variables)"
+kubectl -n $NAMESPACE rollout restart deploy
 
 rm decoded-kube-config.yaml
 
@@ -49,6 +51,7 @@ echo "Cleaning up temporary files..."
 find k8s/tmp -type f -name '*.yaml' -exec rm {} +
 
 echo "Cleanup complete."
+
 
 echo "Waiting 30s for services to start..."
 for ((i=30; i>=0; i--)); do
@@ -61,9 +64,9 @@ for ((i=30; i>=0; i--)); do
 done
 source ./k8s/scripts/init-env.sh
 
-
 echo  "Services:"
 echo "	- hasura: http://$NAMESPACE.hasura.$DOMAIN"
 echo "	- client: http://$NAMESPACE.client.$DOMAIN"
 echo "	- server: http://$NAMESPACE.server.$DOMAIN"
 echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
+

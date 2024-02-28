@@ -2,6 +2,10 @@ pipeline {
     agent {
 			label 'node20'
 		}
+    environment {
+        NAMESPACE="${env.BRANCH_NAME.toLowerCase().replaceAll('/', '-')}"
+				TAG="${env.BUILD_NUMBER}"
+    }
     stages {
 				stage('Install Packages') {
 						steps {
@@ -18,12 +22,14 @@ pipeline {
                     stages {
                         stage('Pre Build') { steps {  dir('services/server') { sh 'bash scripts/pre-build.sh' } } }
 												stage('Build') { steps {  dir('services/server') { sh 'bash scripts/build.sh' } } }
+												stage('Dockerize') { steps {  dir('services/server') { sh 'bash scripts/dockerize.sh' } } }
                     }
                 }
                 stage('Client') {
                     stages {
                         stage('Pre Build') { steps {  dir('services/client') { sh 'bash scripts/pre-build.sh' } } }
 												stage('Build') { steps {  dir('services/client') { sh 'bash scripts/build.sh' } } }
+												stage('Dockerize') { steps {  dir('services/client') { sh 'bash scripts/dockerize.sh' } } }
                     }
                 }
 								stage('Hasura') {
