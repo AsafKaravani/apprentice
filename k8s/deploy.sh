@@ -76,4 +76,4 @@ echo "	- server: http://$NAMESPACE.server.$DOMAIN"
 echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
 
 
-rm decoded-kube-config.yaml
+rm "$decoded_kube_config_path"
