@@ -2,10 +2,7 @@ pipeline {
     agent {
 			label 'node20'
 		}
-    environment {
-        NAMESPACE="${env.BRANCH_NAME.toLowerCase().replaceAll('/', '-')}"
-				TAG="${env.BUILD_NUMBER}"
-    }
+
     stages {
 				stage('Install Packages') {
 						steps {
