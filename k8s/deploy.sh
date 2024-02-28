@@ -1,3 +1,11 @@
+current_dir=$(dirname "$0")
+decoded_kube_config_path="$current_dir/decoded-kube-config.yaml"
+
+echo $KUBE_CONFIG | base64 --decode > "$decoded_kube_config_path"
+
+# Option 1: Set the KUBECONFIG environment variable to use the decoded file
+export KUBECONFIG="$decoded_kube_config_path"
+
 source ./k8s/scripts/set-node-ports.sh
 source ./k8s/scripts/set-endpoints.sh
 
@@ -32,10 +40,7 @@ for file in k8s/*.yaml; do
     replace_env_vars "$file"
 done
 
-echo $KUBE_CONFIG | base64 --decode > decoded-kube-config.yaml
 
-# Option 1: Set the KUBECONFIG environment variable to use the decoded file
-export KUBECONFIG=decoded-kube-config.yaml
 
 # Now you can use kubectl commands directly
 kubectl apply -f k8s/tmp/namespace.yaml
@@ -45,7 +50,7 @@ kubectl apply -f k8s/tmp
 echo "Restarting deployments... (This step is for existing environments to refresh images and environment variables)"
 kubectl -n $NAMESPACE rollout restart deploy
 
-rm decoded-kube-config.yaml
+
 
 echo "Cleaning up temporary files..."
 find k8s/tmp -type f -name '*.yaml' -exec rm {} +
@@ -70,3 +75,5 @@ echo "	- client: http://$NAMESPACE.client.$DOMAIN"
 echo "	- server: http://$NAMESPACE.server.$DOMAIN"
 echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
 
+
+rm decoded-kube-config.yaml
