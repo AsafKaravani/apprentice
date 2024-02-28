@@ -3,33 +3,46 @@ kind: Ingress
 metadata:
   name: ingress
   namespace: ${NAMESPACE}
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: ${NAMESPACE}.${DOMAIN}
+  - host: ${NAMESPACE}.hasura.${DOMAIN}
     http:
       paths:
-      - path: /hasura(/|$)(.*)
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
             name: hasura
             port:
               number: 80
-      - path: /client(/|$)(.*)
+  - host: ${NAMESPACE}.client.${DOMAIN}
+    http:
+      paths:
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
             name: client
             port:
               number: 80
-      - path: /server(/|$)(.*)
+  - host: ${NAMESPACE}.server.${DOMAIN}
+    http:
+      paths:
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
             name: server
             port:
-              number: 80
+              number: ${SERVER_PORT}
+  - host: ${NAMESPACE}.postgres.${DOMAIN}
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: postgres
+            port:
+              number: ${PG_PORT}
   ingressClassName: nginx

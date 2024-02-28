@@ -1,3 +1,5 @@
+source  ./k8s/set-node-ports.sh
+
 replace_env_vars() {
     local filename=$1
     local dirname=$(dirname "$filename")
@@ -41,7 +43,23 @@ find k8s/tmp -type f -name '*.yaml' -exec rm {} +
 echo "Cleanup complete."
 
 echo  "Services:"
-echo "	- hasura: http://$NAMESPACE.$DOMAIN/hasura"
-echo "	- client: http://$NAMESPACE.$DOMAIN/client"
-echo "	- server: http://$NAMESPACE.$DOMAIN/server"
-echo "	- pstgre: http://$NAMESPACE.$DOMAIN/postgres"
+echo "	- hasura: http://$NAMESPACE.hasura.$DOMAIN"
+echo "	- client: http://$NAMESPACE.client.$DOMAIN"
+echo "	- server: http://$NAMESPACE.server.$DOMAIN"
+echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
+
+# # echo "Waiting for services to start..."
+# # sleep 20
+
+# echo "Running migrations and seeding data..."
+# ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+# echo $ROOT_DIR
+
+# # Run DB migrations and seed data
+# cd $ROOT_DIR/services/db
+# yarn prisma migrate deploy
+# yarn ts-node seed/seed-db.ts
+
+# # Run Hasura metadata apply
+# cd $ROOT_DIR/services/client
+# source ./scripts/apply.sh
