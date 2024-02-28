@@ -1,9 +1,17 @@
-source  ./k8s/set-node-ports.sh
+source ./k8s/scripts/set-node-ports.sh
+source ./k8s/scripts/set-endpoints.sh
 
 replace_env_vars() {
-    local filename=$1
-    local dirname=$(dirname "$filename")
-    local basename=$(basename "$filename")
+
+		local filename=$1
+		local dirname=$(dirname "$filename")
+		local basename=$(basename "$filename")
+
+		# Create the tmp folder if it doesn't exist
+		if [ ! -d "$dirname/tmp" ]; then
+			mkdir "$dirname/tmp"
+		fi
+
     
     if [ ! -f "$filename" ]; then
         echo "File does not exist: $filename"
@@ -42,24 +50,20 @@ find k8s/tmp -type f -name '*.yaml' -exec rm {} +
 
 echo "Cleanup complete."
 
+echo "Waiting 30s for services to start..."
+for ((i=30; i>=0; i--)); do
+	if [ $i -eq 1 ]; then
+		echo -ne "1 second left...\r"
+	else
+		echo -ne "$i seconds left...\r"
+	fi
+	sleep 1
+done
+source ./k8s/scripts/init-env.sh
+
+
 echo  "Services:"
 echo "	- hasura: http://$NAMESPACE.hasura.$DOMAIN"
 echo "	- client: http://$NAMESPACE.client.$DOMAIN"
 echo "	- server: http://$NAMESPACE.server.$DOMAIN"
 echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
-
-# # echo "Waiting for services to start..."
-# # sleep 20
-
-# echo "Running migrations and seeding data..."
-# ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
-# echo $ROOT_DIR
-
-# # Run DB migrations and seed data
-# cd $ROOT_DIR/services/db
-# yarn prisma migrate deploy
-# yarn ts-node seed/seed-db.ts
-
-# # Run Hasura metadata apply
-# cd $ROOT_DIR/services/client
-# source ./scripts/apply.sh

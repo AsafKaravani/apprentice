@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
-	const port = parseInt(process.env.PORT || process.env.SERVER_PORT) || 3000;
+	const port = parseInt(process.env.PORT || process.env.SERVER_PORT) || 5559;
 
 	const config = new DocumentBuilder()
 		.setTitle('Apprentice')

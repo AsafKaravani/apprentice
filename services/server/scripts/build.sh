@@ -1,1 +1,1 @@
-echo 'Building the server...'
+yarn build

@@ -39,8 +39,11 @@ COPY --from=modules /app/node_modules ./node_modules
 
 ENV NODE_ENV=production
 
+EXPOSE 5559
+
 # Creates a "dist" folder with the production build
 RUN yarn build
+
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
