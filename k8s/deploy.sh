@@ -1,5 +1,6 @@
 current_dir=$(dirname "$(realpath "$0")")
 decoded_kube_config_path="$current_dir/decoded-kube-config.yaml"
+echo "decoded_kube_config_path= $decoded_kube_config_path"
 
 echo $KUBE_CONFIG | base64 --decode > "$decoded_kube_config_path"
 
@@ -52,10 +53,6 @@ kubectl -n $NAMESPACE rollout restart deploy
 
 
 
-echo "Cleaning up temporary files..."
-find k8s/tmp -type f -name '*.yaml' -exec rm {} +
-
-echo "Cleanup complete."
 
 
 echo "Waiting 30s for services to start..."
@@ -77,3 +74,7 @@ echo "	- pstgre: http://$DOMAIN:$POSTGRES_NODEPORT"
 
 
 rm "$decoded_kube_config_path"
+
+echo "Cleaning up temporary files..."
+find k8s/tmp -type f -name '*.yaml' -exec rm {} +
+echo "Cleanup complete."
