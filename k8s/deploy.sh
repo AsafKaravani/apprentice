@@ -1,4 +1,4 @@
-current_dir=$(dirname "$0")
+current_dir=$(dirname "$(realpath "$0")")
 decoded_kube_config_path="$current_dir/decoded-kube-config.yaml"
 
 echo $KUBE_CONFIG | base64 --decode > "$decoded_kube_config_path"
