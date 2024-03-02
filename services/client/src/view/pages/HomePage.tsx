@@ -75,14 +75,12 @@ const Question: FC<QuestionProps> = props => {
 	}
 
 	useEffect(() => {
-		(async () => {
-			if (response) {
-				const data = await response.json();
-				setScore(data.score);
-				setNote(data.note);
-			}
-		})()
-	}, [response]);
+		if (!response?.ok) return
+		response.json().then(data => {
+			setScore(data.score);
+			setNote(data.note);
+		});
+	}, [response, loading, error]);
 
 	return <div className='w-full'>
 		<h3>
