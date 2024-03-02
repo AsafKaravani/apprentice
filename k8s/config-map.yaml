@@ -10,6 +10,7 @@ data:
   # SERVER
   VITE_SERVER_ENDPOINT: 'http://${NAMESPACE}.server.${DOMAIN}'
   SERVER_PORT: '${SERVER_PORT}'
+  OPENAI_API_KEY: '${OPENAI_API_KEY}'
   # HASURA
   VITE_HASURA_GQL_ENDPOINT: 'http://${NAMESPACE}.hasura.${DOMAIN}/v1/graphql'
   HASURA_ENDPOINT: 'http://${NAMESPACE}.hasura.${DOMAIN}'

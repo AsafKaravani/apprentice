@@ -1,9 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
+	app.setGlobalPrefix('api/v1');
+	app.useGlobalPipes(new ValidationPipe());
+
 	const port = parseInt(process.env.PORT || process.env.SERVER_PORT) || 5559;
 
 	const config = new DocumentBuilder()
