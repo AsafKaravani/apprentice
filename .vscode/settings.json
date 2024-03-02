@@ -51,5 +51,8 @@
 	},
 	"[groovy]": {
 		"editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	}
 }
