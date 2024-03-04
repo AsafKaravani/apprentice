@@ -22,3 +22,9 @@
 	--primary-color: #1942c9;
 	--secondary-color: #000;
 }
+
+html, body, #root{
+	-webkit-overflow-scrolling: touch !important;
+	overflow: auto !important;
+	height: 100% !important;
+}
