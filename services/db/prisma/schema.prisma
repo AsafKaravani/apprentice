@@ -126,7 +126,7 @@ model Question {
   correct_options Boolean[]
 
   // TRUE_FALSE
-  boolean_expected_answer Boolean
+  boolean_expected_answer Boolean?
 
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
