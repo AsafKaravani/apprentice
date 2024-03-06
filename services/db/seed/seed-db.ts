@@ -8,9 +8,8 @@ db.$connect();
 (async () => {
 	console.log('Seeding database...');
 	
-	// Clear the table
-	const deleted = await db.profile.deleteMany();
-	console.log('Deleted profiles:', deleted.count);
+	// Clear the DB
+	await clearDb();
 
 	// Create 10 profiles
 	console.log('Creating profiles...');
@@ -41,11 +40,15 @@ db.$connect();
 async function clearDb() {
 	const allProperties = Reflect.ownKeys(Object.getPrototypeOf(db))
 	const modelNames = allProperties.filter(x => x != "constructor" && x != "on" && x != "connect" && x != "runDisconnect" && x != "disconnect")
+	let totalDeleted = 0;
 	let modelName: any;
 	for (modelName of modelNames) {
 		console.log('Deleting', modelName);
 		const model: any = db[modelName];
-		if (model.deleteMany)
-			model.deleteMany()
+		if (model.deleteMany) {
+			const deleted = await model.deleteMany()
+			totalDeleted += deleted.count;
+			console.log('Deleted', deleted.count, modelName);
+		}
 	}
 }
