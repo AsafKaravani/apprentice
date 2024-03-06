@@ -46,13 +46,13 @@ export const fakeModels = {
 		}
 	},
 
-	question_MultipleChoice: (examId: string): Question => {
+	question_MultipleChoice: (examId: string, question: string, options: string[], correctOptions: boolean[]): Question => {
 		return {
 			id: fake.randUuid(),
 			question: fake.randParagraph(),
 			type: 'MULTIPLE_CHOICE',
-			options: [],
-			correct_options: [],
+			options: options,
+			correct_options: correctOptions,
 
 			boolean_expected_answer: null,
 			expected_answer: null,
@@ -64,12 +64,12 @@ export const fakeModels = {
 		}
 	},
 
-	question_TrueFalse: (examId: string): Question => {
+	question_TrueFalse: (examId: string, question: string, booleanExpectedAnswer: boolean): Question => {
 		return {
 			id: fake.randUuid(),
-			question: fake.randParagraph(),
+			question: question,
 			type: 'TRUE_FALSE',
-			boolean_expected_answer: null,
+			boolean_expected_answer: booleanExpectedAnswer,
 			
 			options: [],
 			correct_options: [],
@@ -83,12 +83,13 @@ export const fakeModels = {
 		}
 	},
 
-	question_FreeText: (examId: string): Question => {
+	question_FreeText: (examId: string, question: string, expectedAnswer: string): Question => {
 		return {
 			id: fake.randUuid(),
-			question: fake.randParagraph(),
+			question: question,
 			type: 'FREE_TEXT',
-			expected_answer: null,
+			expected_answer: expectedAnswer,
+			
 			options: [],
 			correct_options: [],
 			boolean_expected_answer: null,
