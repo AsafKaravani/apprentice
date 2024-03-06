@@ -8,28 +8,65 @@ db.$connect();
 (async () => {
 	
 	
-	console.log('Clearing database');
+	console.log('┌───────────────────────┐');
+	console.log('│   Clearing Database   │');
+	console.log('└───────────────────────┘');
 	
 	const totalDeleted = await clearDb();
 	console.log('Total deleted:', totalDeleted);
 	
 	
-	console.log('Seeding database...');
+	console.log('┌───────────────────────┐');
+	console.log('│   Seeding database    │');
+	console.log('└───────────────────────┘');
 
 	console.log('Creating profiles...');
 	const profiles = await db.profile.createMany({data: arrayOf(10, fakeModels.profile)})	
 	console.log('Profiles created:', profiles.count);
+	const allProfiles = await db.profile.findMany();
 
 	console.log('Creating organizations...');
 	const organizations = await db.organization.createMany({data: arrayOf(3, fakeModels.organization)})
 	console.log('Organizations created:', organizations.count);
+	const allOrganizations = await db.organization.findMany();
 
 	console.log('Creating groups...');
 	const groups = await db.group.createMany({data: arrayOf(5, fakeModels.group)})
 	console.log('Groups created:', groups.count);
+	const allGroups = await db.group.findMany();
 
+	console.log('Creating GroupMembers...');
+	const groupMembers = await db.groupMember.createMany({data: [
+		// One Proile in One Group
+		{
+			group_id: allGroups[0].id,
+			profile_id: allProfiles[0].id
+		},
+		
+		// Two Profiles in One Group
+		{
+			group_id: allGroups[1].id,
+			profile_id: allProfiles[1].id
+		},
+		{
+			group_id: allGroups[1].id,
+			profile_id: allProfiles[2].id
+		},
+
+		// One Profile in Two Groups
+		{
+			group_id: allGroups[3].id,
+			profile_id: allProfiles[3].id
+		},
+		{
+			group_id: allGroups[4].id,
+			profile_id: allProfiles[3].id
+		},
+	]});
+	console.log('GroupMembers created:', groupMembers.count);
 
 })();
+
 
 
 async function clearDb() {
