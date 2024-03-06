@@ -6,40 +6,40 @@ const db = new PrismaClient();
 db.$connect();
 
 (async () => {
-	console.log('Seeding database...');
 	
-	// Clear the DB
-	await clearDb();
+	
+	console.log('Clearing database');
+	
+	const totalDeleted = await clearDb();
+	console.log('Total deleted:', totalDeleted);
+	
+	
+	console.log('Seeding database...');
 
-	// Create 10 profiles
 	console.log('Creating profiles...');
 	const profiles = await db.profile.createMany({data: arrayOf(10, fakeModels.profile)})	
 	console.log('Profiles created:', profiles.count);
 
-	// Create 3 organizations
 	console.log('Creating organizations...');
 	const organizations = await db.organization.createMany({data: arrayOf(3, fakeModels.organization)})
 	console.log('Organizations created:', organizations.count);
 
-	// Create 5 groups
 	console.log('Creating groups...');
 	const groups = await db.group.createMany({data: arrayOf(5, fakeModels.group)})
+	console.log('Groups created:', groups.count);
 
-	// Create 5 group members
-	console.log('Creating group members...');
-	const groupMembers = await db.groupMember.createMany({data: [{
-		group_id: 'asd',
-		profile_id: 'asd',
-	}]})
-
-	
 
 })();
 
 
 async function clearDb() {
-	const allProperties = Reflect.ownKeys(Object.getPrototypeOf(db))
-	const modelNames = allProperties.filter(x => x != "constructor" && x != "on" && x != "connect" && x != "runDisconnect" && x != "disconnect")
+	const allProperties = Object.keys(db)
+	const modelNames = allProperties.filter(x => {
+		if (x.toString().startsWith('$') || x.toString().startsWith('_')) return false;
+		
+		// @ts-expect-error Making checks in the line above, there is no way to create typing for props that are table names
+		return db[x].deleteMany
+	})
 	let totalDeleted = 0;
 	let modelName: any;
 	for (modelName of modelNames) {
@@ -51,4 +51,6 @@ async function clearDb() {
 			console.log('Deleted', deleted.count, modelName);
 		}
 	}
+
+	return totalDeleted;
 }
