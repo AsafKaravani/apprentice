@@ -9,7 +9,7 @@ kubectl port-forward pod/$PG_POD 0:5432 -n $NAMESPACE > $TEMP_FILE 2>&1 &
 
 PID=$! # Save the process ID to kill the port-forwarding later
 sleep 2 # Wait for the port-forwarding to start
-echo $output
+cat $TEMP_FILE
 LOCAL_PG_PORT=$(grep -o '127.0.0.1:[0-9]*' $TEMP_FILE | tail -n 1 | awk -F ':' '{print $2}')
 
 trap "kill $PID" EXIT # Kill the port-forwarding when the script exits
