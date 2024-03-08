@@ -1,0 +1,50 @@
+table:
+  name: ScheduledExam
+  schema: public
+object_relationships:
+  - name: Exam
+    using:
+      foreign_key_constraint_on: examId
+  - name: Group
+    using:
+      foreign_key_constraint_on: groupId
+  - name: Profile
+    using:
+      foreign_key_constraint_on: profile_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - date
+        - examId
+        - groupId
+        - profile_id
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - examId
+        - groupId
+        - id
+        - profile_id
+        - date
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - date
+        - examId
+        - groupId
+        - profile_id
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}
+    comment: ""
