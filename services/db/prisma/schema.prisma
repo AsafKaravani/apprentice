@@ -93,15 +93,19 @@ model Exam {
 }
 
 model ScheduledExam {
-  id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Text
-  examId     String
-  exam       Exam    @relation(fields: [examId], references: [id], onDelete: Cascade)
-  profile_id String
-  profile    Profile @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  groupId    String
-  group      Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Text
+  exam_id    String
+  exam       Exam     @relation(fields: [exam_id], references: [id], onDelete: Cascade)
+  profile_id String?
+  profile    Profile? @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  group_id   String?
+  group      Group?   @relation(fields: [group_id], references: [id], onDelete: Cascade)
 
-  date DateTime
+  start_time DateTime
+  end_time   DateTime
+
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 enum QuestionType {
