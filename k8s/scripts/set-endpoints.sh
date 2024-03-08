@@ -16,7 +16,7 @@ trap "kill $PID" EXIT # Kill the port-forwarding when the script exits
 
 
 echo "Port forwarding setup on local port: $LOCAL_PG_PORT"
-
+rm $TEMP_FILE
 
 # Set endpoints for initialization
 export VITE_SERVER_ENDPOINT="http://${NAMESPACE}.server.${DOMAIN}"
