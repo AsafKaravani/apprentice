@@ -3,7 +3,15 @@ kind: Ingress
 metadata:
   name: ingress
   namespace: ${NAMESPACE}
+  annotations:
+    cert-manager.io/issuer: "letsencrypt"
 spec:
+  tls:
+  - hosts:
+    - ${NAMESPACE}.client.${DOMAIN}
+    - ${NAMESPACE}.hasura.${DOMAIN}
+    - ${NAMESPACE}.server.${DOMAIN}
+    secretName: ${NAMESPACE}-certificate
   rules:
   - host: ${NAMESPACE}.hasura.${DOMAIN}
     http:
