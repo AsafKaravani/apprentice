@@ -80,7 +80,7 @@ spec:
   ports:
   - port: 5432
     targetPort: 5432
-    nodePort: ${POSTGRES_NODEPORT}
   selector:
     app: postgres
-  type: NodePort
+  type: ClusterIP
+
