@@ -4,6 +4,21 @@ pipeline {
 		}
 
     stages {
+				// Set environment variables
+				stage('Set Environment Variables') {
+						steps {
+								script {
+										// print all environment variables
+										sh 'printenv'
+										// Set environment variables
+										sh 'export NAMESPACE=BRANCH_NAME'
+										sh 'export TAG=${GIT_COMMIT[0..7]}'
+
+										sh 'echo $NAMESPACE'
+										sh 'echo $TAG'
+								}
+						}
+				}
 				stage('Install Packages') {
 						steps {
 								script {
