@@ -6,15 +6,6 @@ interface ImportMetaEnv {
 
 	// HASURA
 	readonly VITE_HASURA_GQL_ENDPOINT: string;
-	readonly HASURA_ADMIN_SECRET: string;
-
-	// POSTGRES
-	readonly PG_HOST: string;
-	readonly PG_USERNAME: string;
-	readonly PG_PASSWORD: string;
-	readonly PG_PORT: string;
-	readonly PG_DATABASE: string;
-	readonly PG_SSL: string;
 
 	// FIREBASE
 	readonly VITE_FB_API_KEY: string;
