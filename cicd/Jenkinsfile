@@ -11,7 +11,7 @@ pipeline {
 										// print all environment variables
 										sh 'printenv'
 										// Set environment variables
-										env.NAMESPACE = GIT_BRANCH
+										env.NAMESPACE = GIT_BRANCH.replace('origin/', '')
 										env.TAG = GIT_COMMIT
 
 										sh 'echo $NAMESPACE'
