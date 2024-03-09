@@ -105,12 +105,12 @@ export const AllTypesProps: Record<string,any> = {
 			order_by:"GroupMember_order_by",
 			where:"GroupMember_bool_exp"
 		},
-		ScheduledExams:{
+		scheduledExamsByGroupId:{
 			distinct_on:"ScheduledExam_select_column",
 			order_by:"ScheduledExam_order_by",
 			where:"ScheduledExam_bool_exp"
 		},
-		ScheduledExams_aggregate:{
+		scheduledExamsByGroupId_aggregate:{
 			distinct_on:"ScheduledExam_select_column",
 			order_by:"ScheduledExam_order_by",
 			where:"ScheduledExam_bool_exp"
@@ -214,8 +214,6 @@ export const AllTypesProps: Record<string,any> = {
 	Group_bool_exp:{
 		GroupMembers:"GroupMember_bool_exp",
 		GroupMembers_aggregate:"GroupMember_aggregate_bool_exp",
-		ScheduledExams:"ScheduledExam_bool_exp",
-		ScheduledExams_aggregate:"ScheduledExam_aggregate_bool_exp",
 		_and:"Group_bool_exp",
 		_not:"Group_bool_exp",
 		_or:"Group_bool_exp",
@@ -226,14 +224,16 @@ export const AllTypesProps: Record<string,any> = {
 		name:"String_comparison_exp",
 		phone:"String_comparison_exp",
 		picture_url:"String_comparison_exp",
+		scheduledExamsByGroupId:"ScheduledExam_bool_exp",
+		scheduledExamsByGroupId_aggregate:"ScheduledExam_aggregate_bool_exp",
 		updated_at:"timestamp_comparison_exp",
 		website:"String_comparison_exp"
 	},
 	Group_constraint: "enum" as const,
 	Group_insert_input:{
 		GroupMembers:"GroupMember_arr_rel_insert_input",
-		ScheduledExams:"ScheduledExam_arr_rel_insert_input",
 		created_at:"timestamp",
+		scheduledExamsByGroupId:"ScheduledExam_arr_rel_insert_input",
 		updated_at:"timestamp"
 	},
 	Group_obj_rel_insert_input:{
@@ -247,7 +247,6 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	Group_order_by:{
 		GroupMembers_aggregate:"GroupMember_aggregate_order_by",
-		ScheduledExams_aggregate:"ScheduledExam_aggregate_order_by",
 		created_at:"order_by",
 		description:"order_by",
 		email:"order_by",
@@ -255,6 +254,7 @@ export const AllTypesProps: Record<string,any> = {
 		name:"order_by",
 		phone:"order_by",
 		picture_url:"order_by",
+		scheduledExamsByGroupId_aggregate:"ScheduledExam_aggregate_order_by",
 		updated_at:"order_by",
 		website:"order_by"
 	},
@@ -724,38 +724,50 @@ export const AllTypesProps: Record<string,any> = {
 		on_conflict:"ScheduledExam_on_conflict"
 	},
 	ScheduledExam_bool_exp:{
-		Exam:"Exam_bool_exp",
-		Group:"Group_bool_exp",
 		Profile:"Profile_bool_exp",
 		_and:"ScheduledExam_bool_exp",
 		_not:"ScheduledExam_bool_exp",
 		_or:"ScheduledExam_bool_exp",
-		date:"timestamp_comparison_exp",
-		examId:"String_comparison_exp",
-		groupId:"String_comparison_exp",
+		created_at:"timestamp_comparison_exp",
+		end_time:"timestamp_comparison_exp",
+		examByExamId:"Exam_bool_exp",
+		exam_id:"String_comparison_exp",
+		groupByGroupId:"Group_bool_exp",
+		group_id:"String_comparison_exp",
 		id:"String_comparison_exp",
-		profile_id:"String_comparison_exp"
+		profile_id:"String_comparison_exp",
+		start_time:"timestamp_comparison_exp",
+		updated_at:"timestamp_comparison_exp"
 	},
 	ScheduledExam_constraint: "enum" as const,
 	ScheduledExam_insert_input:{
-		Exam:"Exam_obj_rel_insert_input",
-		Group:"Group_obj_rel_insert_input",
 		Profile:"Profile_obj_rel_insert_input",
-		date:"timestamp"
+		created_at:"timestamp",
+		end_time:"timestamp",
+		examByExamId:"Exam_obj_rel_insert_input",
+		groupByGroupId:"Group_obj_rel_insert_input",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_max_order_by:{
-		date:"order_by",
-		examId:"order_by",
-		groupId:"order_by",
+		created_at:"order_by",
+		end_time:"order_by",
+		exam_id:"order_by",
+		group_id:"order_by",
 		id:"order_by",
-		profile_id:"order_by"
+		profile_id:"order_by",
+		start_time:"order_by",
+		updated_at:"order_by"
 	},
 	ScheduledExam_min_order_by:{
-		date:"order_by",
-		examId:"order_by",
-		groupId:"order_by",
+		created_at:"order_by",
+		end_time:"order_by",
+		exam_id:"order_by",
+		group_id:"order_by",
 		id:"order_by",
-		profile_id:"order_by"
+		profile_id:"order_by",
+		start_time:"order_by",
+		updated_at:"order_by"
 	},
 	ScheduledExam_on_conflict:{
 		constraint:"ScheduledExam_constraint",
@@ -763,28 +775,37 @@ export const AllTypesProps: Record<string,any> = {
 		where:"ScheduledExam_bool_exp"
 	},
 	ScheduledExam_order_by:{
-		Exam:"Exam_order_by",
-		Group:"Group_order_by",
 		Profile:"Profile_order_by",
-		date:"order_by",
-		examId:"order_by",
-		groupId:"order_by",
+		created_at:"order_by",
+		end_time:"order_by",
+		examByExamId:"Exam_order_by",
+		exam_id:"order_by",
+		groupByGroupId:"Group_order_by",
+		group_id:"order_by",
 		id:"order_by",
-		profile_id:"order_by"
+		profile_id:"order_by",
+		start_time:"order_by",
+		updated_at:"order_by"
 	},
 	ScheduledExam_pk_columns_input:{
 
 	},
 	ScheduledExam_select_column: "enum" as const,
 	ScheduledExam_set_input:{
-		date:"timestamp"
+		created_at:"timestamp",
+		end_time:"timestamp",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_stream_cursor_input:{
 		initial_value:"ScheduledExam_stream_cursor_value_input",
 		ordering:"cursor_ordering"
 	},
 	ScheduledExam_stream_cursor_value_input:{
-		date:"timestamp"
+		created_at:"timestamp",
+		end_time:"timestamp",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_update_column: "enum" as const,
 	ScheduledExam_updates:{
@@ -1438,8 +1459,6 @@ export const ReturnTypes: Record<string,any> = {
 	Group:{
 		GroupMembers:"GroupMember",
 		GroupMembers_aggregate:"GroupMember_aggregate",
-		ScheduledExams:"ScheduledExam",
-		ScheduledExams_aggregate:"ScheduledExam_aggregate",
 		created_at:"timestamp",
 		description:"String",
 		email:"String",
@@ -1447,6 +1466,8 @@ export const ReturnTypes: Record<string,any> = {
 		name:"String",
 		phone:"String",
 		picture_url:"String",
+		scheduledExamsByGroupId:"ScheduledExam",
+		scheduledExamsByGroupId_aggregate:"ScheduledExam_aggregate",
 		updated_at:"timestamp",
 		website:"String"
 	},
@@ -1710,14 +1731,17 @@ export const ReturnTypes: Record<string,any> = {
 		returning:"Question"
 	},
 	ScheduledExam:{
-		Exam:"Exam",
-		Group:"Group",
 		Profile:"Profile",
-		date:"timestamp",
-		examId:"String",
-		groupId:"String",
+		created_at:"timestamp",
+		end_time:"timestamp",
+		examByExamId:"Exam",
+		exam_id:"String",
+		groupByGroupId:"Group",
+		group_id:"String",
 		id:"String",
-		profile_id:"String"
+		profile_id:"String",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_aggregate:{
 		aggregate:"ScheduledExam_aggregate_fields",
@@ -1729,18 +1753,24 @@ export const ReturnTypes: Record<string,any> = {
 		min:"ScheduledExam_min_fields"
 	},
 	ScheduledExam_max_fields:{
-		date:"timestamp",
-		examId:"String",
-		groupId:"String",
+		created_at:"timestamp",
+		end_time:"timestamp",
+		exam_id:"String",
+		group_id:"String",
 		id:"String",
-		profile_id:"String"
+		profile_id:"String",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_min_fields:{
-		date:"timestamp",
-		examId:"String",
-		groupId:"String",
+		created_at:"timestamp",
+		end_time:"timestamp",
+		exam_id:"String",
+		group_id:"String",
 		id:"String",
-		profile_id:"String"
+		profile_id:"String",
+		start_time:"timestamp",
+		updated_at:"timestamp"
 	},
 	ScheduledExam_mutation_response:{
 		affected_rows:"Int",

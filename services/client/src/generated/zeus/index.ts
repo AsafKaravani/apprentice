@@ -1046,18 +1046,6 @@ GroupMembers_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
 	order_by?: Array<ValueTypes["GroupMember_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
 	where?: ValueTypes["GroupMember_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["GroupMember_aggregate"]],
-ScheduledExams?: [{	/** distinct select on columns */
-	distinct_on?: Array<ValueTypes["ScheduledExam_select_column"]> | undefined | null | Variable<any, string>,	/** limit the number of rows returned */
-	limit?: number | undefined | null | Variable<any, string>,	/** skip the first n rows. Use only with order_by */
-	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
-	order_by?: Array<ValueTypes["ScheduledExam_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
-	where?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["ScheduledExam"]],
-ScheduledExams_aggregate?: [{	/** distinct select on columns */
-	distinct_on?: Array<ValueTypes["ScheduledExam_select_column"]> | undefined | null | Variable<any, string>,	/** limit the number of rows returned */
-	limit?: number | undefined | null | Variable<any, string>,	/** skip the first n rows. Use only with order_by */
-	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
-	order_by?: Array<ValueTypes["ScheduledExam_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
-	where?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["ScheduledExam_aggregate"]],
 	created_at?:boolean | `@${string}`,
 	description?:boolean | `@${string}`,
 	email?:boolean | `@${string}`,
@@ -1065,6 +1053,18 @@ ScheduledExams_aggregate?: [{	/** distinct select on columns */
 	name?:boolean | `@${string}`,
 	phone?:boolean | `@${string}`,
 	picture_url?:boolean | `@${string}`,
+scheduledExamsByGroupId?: [{	/** distinct select on columns */
+	distinct_on?: Array<ValueTypes["ScheduledExam_select_column"]> | undefined | null | Variable<any, string>,	/** limit the number of rows returned */
+	limit?: number | undefined | null | Variable<any, string>,	/** skip the first n rows. Use only with order_by */
+	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
+	order_by?: Array<ValueTypes["ScheduledExam_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
+	where?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["ScheduledExam"]],
+scheduledExamsByGroupId_aggregate?: [{	/** distinct select on columns */
+	distinct_on?: Array<ValueTypes["ScheduledExam_select_column"]> | undefined | null | Variable<any, string>,	/** limit the number of rows returned */
+	limit?: number | undefined | null | Variable<any, string>,	/** skip the first n rows. Use only with order_by */
+	offset?: number | undefined | null | Variable<any, string>,	/** sort the rows by one or more columns */
+	order_by?: Array<ValueTypes["ScheduledExam_order_by"]> | undefined | null | Variable<any, string>,	/** filter the rows returned */
+	where?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>},ValueTypes["ScheduledExam_aggregate"]],
 	updated_at?:boolean | `@${string}`,
 	website?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
@@ -1253,8 +1253,6 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 ["Group_bool_exp"]: {
 	GroupMembers?: ValueTypes["GroupMember_bool_exp"] | undefined | null | Variable<any, string>,
 	GroupMembers_aggregate?: ValueTypes["GroupMember_aggregate_bool_exp"] | undefined | null | Variable<any, string>,
-	ScheduledExams?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>,
-	ScheduledExams_aggregate?: ValueTypes["ScheduledExam_aggregate_bool_exp"] | undefined | null | Variable<any, string>,
 	_and?: Array<ValueTypes["Group_bool_exp"]> | undefined | null | Variable<any, string>,
 	_not?: ValueTypes["Group_bool_exp"] | undefined | null | Variable<any, string>,
 	_or?: Array<ValueTypes["Group_bool_exp"]> | undefined | null | Variable<any, string>,
@@ -1265,6 +1263,8 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 	name?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	phone?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	picture_url?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
+	scheduledExamsByGroupId?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>,
+	scheduledExamsByGroupId_aggregate?: ValueTypes["ScheduledExam_aggregate_bool_exp"] | undefined | null | Variable<any, string>,
 	updated_at?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
 	website?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>
 };
@@ -1273,7 +1273,6 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 	/** input type for inserting data into table "Group" */
 ["Group_insert_input"]: {
 	GroupMembers?: ValueTypes["GroupMember_arr_rel_insert_input"] | undefined | null | Variable<any, string>,
-	ScheduledExams?: ValueTypes["ScheduledExam_arr_rel_insert_input"] | undefined | null | Variable<any, string>,
 	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	email?: string | undefined | null | Variable<any, string>,
@@ -1281,6 +1280,7 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 	name?: string | undefined | null | Variable<any, string>,
 	phone?: string | undefined | null | Variable<any, string>,
 	picture_url?: string | undefined | null | Variable<any, string>,
+	scheduledExamsByGroupId?: ValueTypes["ScheduledExam_arr_rel_insert_input"] | undefined | null | Variable<any, string>,
 	updated_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
 	website?: string | undefined | null | Variable<any, string>
 };
@@ -1333,7 +1333,6 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 	/** Ordering options when selecting data from "Group". */
 ["Group_order_by"]: {
 	GroupMembers_aggregate?: ValueTypes["GroupMember_aggregate_order_by"] | undefined | null | Variable<any, string>,
-	ScheduledExams_aggregate?: ValueTypes["ScheduledExam_aggregate_order_by"] | undefined | null | Variable<any, string>,
 	created_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	description?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	email?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
@@ -1341,6 +1340,7 @@ count?: [{	columns?: Array<ValueTypes["Group_select_column"]> | undefined | null
 	name?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	phone?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	picture_url?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	scheduledExamsByGroupId_aggregate?: ValueTypes["ScheduledExam_aggregate_order_by"] | undefined | null | Variable<any, string>,
 	updated_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	website?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
 };
@@ -2202,16 +2202,19 @@ count?: [{	columns?: Array<ValueTypes["Question_select_column"]> | undefined | n
 	/** columns and relationships of "ScheduledExam" */
 ["ScheduledExam"]: AliasType<{
 	/** An object relationship */
-	Exam?:ValueTypes["Exam"],
-	/** An object relationship */
-	Group?:ValueTypes["Group"],
-	/** An object relationship */
 	Profile?:ValueTypes["Profile"],
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	/** An object relationship */
+	examByExamId?:ValueTypes["Exam"],
+	exam_id?:boolean | `@${string}`,
+	/** An object relationship */
+	groupByGroupId?:ValueTypes["Group"],
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** aggregated selection of "ScheduledExam" */
@@ -2250,64 +2253,82 @@ count?: [{	columns?: Array<ValueTypes["ScheduledExam_select_column"]> | undefine
 };
 	/** Boolean expression to filter rows from the table "ScheduledExam". All fields are combined with a logical 'AND'. */
 ["ScheduledExam_bool_exp"]: {
-	Exam?: ValueTypes["Exam_bool_exp"] | undefined | null | Variable<any, string>,
-	Group?: ValueTypes["Group_bool_exp"] | undefined | null | Variable<any, string>,
 	Profile?: ValueTypes["Profile_bool_exp"] | undefined | null | Variable<any, string>,
 	_and?: Array<ValueTypes["ScheduledExam_bool_exp"]> | undefined | null | Variable<any, string>,
 	_not?: ValueTypes["ScheduledExam_bool_exp"] | undefined | null | Variable<any, string>,
 	_or?: Array<ValueTypes["ScheduledExam_bool_exp"]> | undefined | null | Variable<any, string>,
-	date?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
-	examId?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
-	groupId?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
+	examByExamId?: ValueTypes["Exam_bool_exp"] | undefined | null | Variable<any, string>,
+	exam_id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
+	groupByGroupId?: ValueTypes["Group_bool_exp"] | undefined | null | Variable<any, string>,
+	group_id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
 	id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
-	profile_id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>
+	profile_id?: ValueTypes["String_comparison_exp"] | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["timestamp_comparison_exp"] | undefined | null | Variable<any, string>
 };
 	/** unique or primary key constraints on table "ScheduledExam" */
 ["ScheduledExam_constraint"]:ScheduledExam_constraint;
 	/** input type for inserting data into table "ScheduledExam" */
 ["ScheduledExam_insert_input"]: {
-	Exam?: ValueTypes["Exam_obj_rel_insert_input"] | undefined | null | Variable<any, string>,
-	Group?: ValueTypes["Group_obj_rel_insert_input"] | undefined | null | Variable<any, string>,
 	Profile?: ValueTypes["Profile_obj_rel_insert_input"] | undefined | null | Variable<any, string>,
-	date?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
-	examId?: string | undefined | null | Variable<any, string>,
-	groupId?: string | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	examByExamId?: ValueTypes["Exam_obj_rel_insert_input"] | undefined | null | Variable<any, string>,
+	exam_id?: string | undefined | null | Variable<any, string>,
+	groupByGroupId?: ValueTypes["Group_obj_rel_insert_input"] | undefined | null | Variable<any, string>,
+	group_id?: string | undefined | null | Variable<any, string>,
 	id?: string | undefined | null | Variable<any, string>,
-	profile_id?: string | undefined | null | Variable<any, string>
+	profile_id?: string | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>
 };
 	/** aggregate max on columns */
 ["ScheduledExam_max_fields"]: AliasType<{
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	exam_id?:boolean | `@${string}`,
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** order by max() on columns of table "ScheduledExam" */
 ["ScheduledExam_max_order_by"]: {
-	date?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	examId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	groupId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	exam_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	group_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
+	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
 };
 	/** aggregate min on columns */
 ["ScheduledExam_min_fields"]: AliasType<{
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	exam_id?:boolean | `@${string}`,
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** order by min() on columns of table "ScheduledExam" */
 ["ScheduledExam_min_order_by"]: {
-	date?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	examId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	groupId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	exam_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	group_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
+	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
 };
 	/** response of any mutation on the table "ScheduledExam" */
 ["ScheduledExam_mutation_response"]: AliasType<{
@@ -2325,14 +2346,17 @@ count?: [{	columns?: Array<ValueTypes["ScheduledExam_select_column"]> | undefine
 };
 	/** Ordering options when selecting data from "ScheduledExam". */
 ["ScheduledExam_order_by"]: {
-	Exam?: ValueTypes["Exam_order_by"] | undefined | null | Variable<any, string>,
-	Group?: ValueTypes["Group_order_by"] | undefined | null | Variable<any, string>,
 	Profile?: ValueTypes["Profile_order_by"] | undefined | null | Variable<any, string>,
-	date?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	examId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	groupId?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	examByExamId?: ValueTypes["Exam_order_by"] | undefined | null | Variable<any, string>,
+	exam_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	groupByGroupId?: ValueTypes["Group_order_by"] | undefined | null | Variable<any, string>,
+	group_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
 	id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
-	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
+	profile_id?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["order_by"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["order_by"] | undefined | null | Variable<any, string>
 };
 	/** primary key columns input for table: ScheduledExam */
 ["ScheduledExam_pk_columns_input"]: {
@@ -2342,11 +2366,14 @@ count?: [{	columns?: Array<ValueTypes["ScheduledExam_select_column"]> | undefine
 ["ScheduledExam_select_column"]:ScheduledExam_select_column;
 	/** input type for updating data in table "ScheduledExam" */
 ["ScheduledExam_set_input"]: {
-	date?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
-	examId?: string | undefined | null | Variable<any, string>,
-	groupId?: string | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	exam_id?: string | undefined | null | Variable<any, string>,
+	group_id?: string | undefined | null | Variable<any, string>,
 	id?: string | undefined | null | Variable<any, string>,
-	profile_id?: string | undefined | null | Variable<any, string>
+	profile_id?: string | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>
 };
 	/** Streaming cursor of the table "ScheduledExam" */
 ["ScheduledExam_stream_cursor_input"]: {
@@ -2357,11 +2384,14 @@ count?: [{	columns?: Array<ValueTypes["ScheduledExam_select_column"]> | undefine
 };
 	/** Initial value of the column from where the streaming should start */
 ["ScheduledExam_stream_cursor_value_input"]: {
-	date?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
-	examId?: string | undefined | null | Variable<any, string>,
-	groupId?: string | undefined | null | Variable<any, string>,
+	created_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	end_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	exam_id?: string | undefined | null | Variable<any, string>,
+	group_id?: string | undefined | null | Variable<any, string>,
 	id?: string | undefined | null | Variable<any, string>,
-	profile_id?: string | undefined | null | Variable<any, string>
+	profile_id?: string | undefined | null | Variable<any, string>,
+	start_time?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>,
+	updated_at?: ValueTypes["timestamp"] | undefined | null | Variable<any, string>
 };
 	/** update columns of table "ScheduledExam" */
 ["ScheduledExam_update_column"]:ScheduledExam_update_column;
@@ -3282,18 +3312,6 @@ GroupMembers_aggregate?: [{	/** distinct select on columns */
 	offset?: number | undefined | null,	/** sort the rows by one or more columns */
 	order_by?: Array<ResolverInputTypes["GroupMember_order_by"]> | undefined | null,	/** filter the rows returned */
 	where?: ResolverInputTypes["GroupMember_bool_exp"] | undefined | null},ResolverInputTypes["GroupMember_aggregate"]],
-ScheduledExams?: [{	/** distinct select on columns */
-	distinct_on?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | undefined | null,	/** limit the number of rows returned */
-	limit?: number | undefined | null,	/** skip the first n rows. Use only with order_by */
-	offset?: number | undefined | null,	/** sort the rows by one or more columns */
-	order_by?: Array<ResolverInputTypes["ScheduledExam_order_by"]> | undefined | null,	/** filter the rows returned */
-	where?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null},ResolverInputTypes["ScheduledExam"]],
-ScheduledExams_aggregate?: [{	/** distinct select on columns */
-	distinct_on?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | undefined | null,	/** limit the number of rows returned */
-	limit?: number | undefined | null,	/** skip the first n rows. Use only with order_by */
-	offset?: number | undefined | null,	/** sort the rows by one or more columns */
-	order_by?: Array<ResolverInputTypes["ScheduledExam_order_by"]> | undefined | null,	/** filter the rows returned */
-	where?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null},ResolverInputTypes["ScheduledExam_aggregate"]],
 	created_at?:boolean | `@${string}`,
 	description?:boolean | `@${string}`,
 	email?:boolean | `@${string}`,
@@ -3301,6 +3319,18 @@ ScheduledExams_aggregate?: [{	/** distinct select on columns */
 	name?:boolean | `@${string}`,
 	phone?:boolean | `@${string}`,
 	picture_url?:boolean | `@${string}`,
+scheduledExamsByGroupId?: [{	/** distinct select on columns */
+	distinct_on?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | undefined | null,	/** limit the number of rows returned */
+	limit?: number | undefined | null,	/** skip the first n rows. Use only with order_by */
+	offset?: number | undefined | null,	/** sort the rows by one or more columns */
+	order_by?: Array<ResolverInputTypes["ScheduledExam_order_by"]> | undefined | null,	/** filter the rows returned */
+	where?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null},ResolverInputTypes["ScheduledExam"]],
+scheduledExamsByGroupId_aggregate?: [{	/** distinct select on columns */
+	distinct_on?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | undefined | null,	/** limit the number of rows returned */
+	limit?: number | undefined | null,	/** skip the first n rows. Use only with order_by */
+	offset?: number | undefined | null,	/** sort the rows by one or more columns */
+	order_by?: Array<ResolverInputTypes["ScheduledExam_order_by"]> | undefined | null,	/** filter the rows returned */
+	where?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null},ResolverInputTypes["ScheduledExam_aggregate"]],
 	updated_at?:boolean | `@${string}`,
 	website?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
@@ -3489,8 +3519,6 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 ["Group_bool_exp"]: {
 	GroupMembers?: ResolverInputTypes["GroupMember_bool_exp"] | undefined | null,
 	GroupMembers_aggregate?: ResolverInputTypes["GroupMember_aggregate_bool_exp"] | undefined | null,
-	ScheduledExams?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null,
-	ScheduledExams_aggregate?: ResolverInputTypes["ScheduledExam_aggregate_bool_exp"] | undefined | null,
 	_and?: Array<ResolverInputTypes["Group_bool_exp"]> | undefined | null,
 	_not?: ResolverInputTypes["Group_bool_exp"] | undefined | null,
 	_or?: Array<ResolverInputTypes["Group_bool_exp"]> | undefined | null,
@@ -3501,6 +3529,8 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 	name?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	phone?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	picture_url?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
+	scheduledExamsByGroupId?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null,
+	scheduledExamsByGroupId_aggregate?: ResolverInputTypes["ScheduledExam_aggregate_bool_exp"] | undefined | null,
 	updated_at?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
 	website?: ResolverInputTypes["String_comparison_exp"] | undefined | null
 };
@@ -3509,7 +3539,6 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 	/** input type for inserting data into table "Group" */
 ["Group_insert_input"]: {
 	GroupMembers?: ResolverInputTypes["GroupMember_arr_rel_insert_input"] | undefined | null,
-	ScheduledExams?: ResolverInputTypes["ScheduledExam_arr_rel_insert_input"] | undefined | null,
 	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
 	description?: string | undefined | null,
 	email?: string | undefined | null,
@@ -3517,6 +3546,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 	name?: string | undefined | null,
 	phone?: string | undefined | null,
 	picture_url?: string | undefined | null,
+	scheduledExamsByGroupId?: ResolverInputTypes["ScheduledExam_arr_rel_insert_input"] | undefined | null,
 	updated_at?: ResolverInputTypes["timestamp"] | undefined | null,
 	website?: string | undefined | null
 };
@@ -3569,7 +3599,6 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 	/** Ordering options when selecting data from "Group". */
 ["Group_order_by"]: {
 	GroupMembers_aggregate?: ResolverInputTypes["GroupMember_aggregate_order_by"] | undefined | null,
-	ScheduledExams_aggregate?: ResolverInputTypes["ScheduledExam_aggregate_order_by"] | undefined | null,
 	created_at?: ResolverInputTypes["order_by"] | undefined | null,
 	description?: ResolverInputTypes["order_by"] | undefined | null,
 	email?: ResolverInputTypes["order_by"] | undefined | null,
@@ -3577,6 +3606,7 @@ count?: [{	columns?: Array<ResolverInputTypes["Group_select_column"]> | undefine
 	name?: ResolverInputTypes["order_by"] | undefined | null,
 	phone?: ResolverInputTypes["order_by"] | undefined | null,
 	picture_url?: ResolverInputTypes["order_by"] | undefined | null,
+	scheduledExamsByGroupId_aggregate?: ResolverInputTypes["ScheduledExam_aggregate_order_by"] | undefined | null,
 	updated_at?: ResolverInputTypes["order_by"] | undefined | null,
 	website?: ResolverInputTypes["order_by"] | undefined | null
 };
@@ -4438,16 +4468,19 @@ count?: [{	columns?: Array<ResolverInputTypes["Question_select_column"]> | undef
 	/** columns and relationships of "ScheduledExam" */
 ["ScheduledExam"]: AliasType<{
 	/** An object relationship */
-	Exam?:ResolverInputTypes["Exam"],
-	/** An object relationship */
-	Group?:ResolverInputTypes["Group"],
-	/** An object relationship */
 	Profile?:ResolverInputTypes["Profile"],
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	/** An object relationship */
+	examByExamId?:ResolverInputTypes["Exam"],
+	exam_id?:boolean | `@${string}`,
+	/** An object relationship */
+	groupByGroupId?:ResolverInputTypes["Group"],
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** aggregated selection of "ScheduledExam" */
@@ -4486,64 +4519,82 @@ count?: [{	columns?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | 
 };
 	/** Boolean expression to filter rows from the table "ScheduledExam". All fields are combined with a logical 'AND'. */
 ["ScheduledExam_bool_exp"]: {
-	Exam?: ResolverInputTypes["Exam_bool_exp"] | undefined | null,
-	Group?: ResolverInputTypes["Group_bool_exp"] | undefined | null,
 	Profile?: ResolverInputTypes["Profile_bool_exp"] | undefined | null,
 	_and?: Array<ResolverInputTypes["ScheduledExam_bool_exp"]> | undefined | null,
 	_not?: ResolverInputTypes["ScheduledExam_bool_exp"] | undefined | null,
 	_or?: Array<ResolverInputTypes["ScheduledExam_bool_exp"]> | undefined | null,
-	date?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
-	examId?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
-	groupId?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
+	created_at?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
+	end_time?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
+	examByExamId?: ResolverInputTypes["Exam_bool_exp"] | undefined | null,
+	exam_id?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
+	groupByGroupId?: ResolverInputTypes["Group_bool_exp"] | undefined | null,
+	group_id?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
 	id?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
-	profile_id?: ResolverInputTypes["String_comparison_exp"] | undefined | null
+	profile_id?: ResolverInputTypes["String_comparison_exp"] | undefined | null,
+	start_time?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null,
+	updated_at?: ResolverInputTypes["timestamp_comparison_exp"] | undefined | null
 };
 	/** unique or primary key constraints on table "ScheduledExam" */
 ["ScheduledExam_constraint"]:ScheduledExam_constraint;
 	/** input type for inserting data into table "ScheduledExam" */
 ["ScheduledExam_insert_input"]: {
-	Exam?: ResolverInputTypes["Exam_obj_rel_insert_input"] | undefined | null,
-	Group?: ResolverInputTypes["Group_obj_rel_insert_input"] | undefined | null,
 	Profile?: ResolverInputTypes["Profile_obj_rel_insert_input"] | undefined | null,
-	date?: ResolverInputTypes["timestamp"] | undefined | null,
-	examId?: string | undefined | null,
-	groupId?: string | undefined | null,
+	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
+	end_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	examByExamId?: ResolverInputTypes["Exam_obj_rel_insert_input"] | undefined | null,
+	exam_id?: string | undefined | null,
+	groupByGroupId?: ResolverInputTypes["Group_obj_rel_insert_input"] | undefined | null,
+	group_id?: string | undefined | null,
 	id?: string | undefined | null,
-	profile_id?: string | undefined | null
+	profile_id?: string | undefined | null,
+	start_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	updated_at?: ResolverInputTypes["timestamp"] | undefined | null
 };
 	/** aggregate max on columns */
 ["ScheduledExam_max_fields"]: AliasType<{
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	exam_id?:boolean | `@${string}`,
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** order by max() on columns of table "ScheduledExam" */
 ["ScheduledExam_max_order_by"]: {
-	date?: ResolverInputTypes["order_by"] | undefined | null,
-	examId?: ResolverInputTypes["order_by"] | undefined | null,
-	groupId?: ResolverInputTypes["order_by"] | undefined | null,
+	created_at?: ResolverInputTypes["order_by"] | undefined | null,
+	end_time?: ResolverInputTypes["order_by"] | undefined | null,
+	exam_id?: ResolverInputTypes["order_by"] | undefined | null,
+	group_id?: ResolverInputTypes["order_by"] | undefined | null,
 	id?: ResolverInputTypes["order_by"] | undefined | null,
-	profile_id?: ResolverInputTypes["order_by"] | undefined | null
+	profile_id?: ResolverInputTypes["order_by"] | undefined | null,
+	start_time?: ResolverInputTypes["order_by"] | undefined | null,
+	updated_at?: ResolverInputTypes["order_by"] | undefined | null
 };
 	/** aggregate min on columns */
 ["ScheduledExam_min_fields"]: AliasType<{
-	date?:boolean | `@${string}`,
-	examId?:boolean | `@${string}`,
-	groupId?:boolean | `@${string}`,
+	created_at?:boolean | `@${string}`,
+	end_time?:boolean | `@${string}`,
+	exam_id?:boolean | `@${string}`,
+	group_id?:boolean | `@${string}`,
 	id?:boolean | `@${string}`,
 	profile_id?:boolean | `@${string}`,
+	start_time?:boolean | `@${string}`,
+	updated_at?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	/** order by min() on columns of table "ScheduledExam" */
 ["ScheduledExam_min_order_by"]: {
-	date?: ResolverInputTypes["order_by"] | undefined | null,
-	examId?: ResolverInputTypes["order_by"] | undefined | null,
-	groupId?: ResolverInputTypes["order_by"] | undefined | null,
+	created_at?: ResolverInputTypes["order_by"] | undefined | null,
+	end_time?: ResolverInputTypes["order_by"] | undefined | null,
+	exam_id?: ResolverInputTypes["order_by"] | undefined | null,
+	group_id?: ResolverInputTypes["order_by"] | undefined | null,
 	id?: ResolverInputTypes["order_by"] | undefined | null,
-	profile_id?: ResolverInputTypes["order_by"] | undefined | null
+	profile_id?: ResolverInputTypes["order_by"] | undefined | null,
+	start_time?: ResolverInputTypes["order_by"] | undefined | null,
+	updated_at?: ResolverInputTypes["order_by"] | undefined | null
 };
 	/** response of any mutation on the table "ScheduledExam" */
 ["ScheduledExam_mutation_response"]: AliasType<{
@@ -4561,14 +4612,17 @@ count?: [{	columns?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | 
 };
 	/** Ordering options when selecting data from "ScheduledExam". */
 ["ScheduledExam_order_by"]: {
-	Exam?: ResolverInputTypes["Exam_order_by"] | undefined | null,
-	Group?: ResolverInputTypes["Group_order_by"] | undefined | null,
 	Profile?: ResolverInputTypes["Profile_order_by"] | undefined | null,
-	date?: ResolverInputTypes["order_by"] | undefined | null,
-	examId?: ResolverInputTypes["order_by"] | undefined | null,
-	groupId?: ResolverInputTypes["order_by"] | undefined | null,
+	created_at?: ResolverInputTypes["order_by"] | undefined | null,
+	end_time?: ResolverInputTypes["order_by"] | undefined | null,
+	examByExamId?: ResolverInputTypes["Exam_order_by"] | undefined | null,
+	exam_id?: ResolverInputTypes["order_by"] | undefined | null,
+	groupByGroupId?: ResolverInputTypes["Group_order_by"] | undefined | null,
+	group_id?: ResolverInputTypes["order_by"] | undefined | null,
 	id?: ResolverInputTypes["order_by"] | undefined | null,
-	profile_id?: ResolverInputTypes["order_by"] | undefined | null
+	profile_id?: ResolverInputTypes["order_by"] | undefined | null,
+	start_time?: ResolverInputTypes["order_by"] | undefined | null,
+	updated_at?: ResolverInputTypes["order_by"] | undefined | null
 };
 	/** primary key columns input for table: ScheduledExam */
 ["ScheduledExam_pk_columns_input"]: {
@@ -4578,11 +4632,14 @@ count?: [{	columns?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | 
 ["ScheduledExam_select_column"]:ScheduledExam_select_column;
 	/** input type for updating data in table "ScheduledExam" */
 ["ScheduledExam_set_input"]: {
-	date?: ResolverInputTypes["timestamp"] | undefined | null,
-	examId?: string | undefined | null,
-	groupId?: string | undefined | null,
+	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
+	end_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	exam_id?: string | undefined | null,
+	group_id?: string | undefined | null,
 	id?: string | undefined | null,
-	profile_id?: string | undefined | null
+	profile_id?: string | undefined | null,
+	start_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	updated_at?: ResolverInputTypes["timestamp"] | undefined | null
 };
 	/** Streaming cursor of the table "ScheduledExam" */
 ["ScheduledExam_stream_cursor_input"]: {
@@ -4593,11 +4650,14 @@ count?: [{	columns?: Array<ResolverInputTypes["ScheduledExam_select_column"]> | 
 };
 	/** Initial value of the column from where the streaming should start */
 ["ScheduledExam_stream_cursor_value_input"]: {
-	date?: ResolverInputTypes["timestamp"] | undefined | null,
-	examId?: string | undefined | null,
-	groupId?: string | undefined | null,
+	created_at?: ResolverInputTypes["timestamp"] | undefined | null,
+	end_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	exam_id?: string | undefined | null,
+	group_id?: string | undefined | null,
 	id?: string | undefined | null,
-	profile_id?: string | undefined | null
+	profile_id?: string | undefined | null,
+	start_time?: ResolverInputTypes["timestamp"] | undefined | null,
+	updated_at?: ResolverInputTypes["timestamp"] | undefined | null
 };
 	/** update columns of table "ScheduledExam" */
 ["ScheduledExam_update_column"]:ScheduledExam_update_column;
@@ -5484,10 +5544,6 @@ export type ModelTypes = {
 	GroupMembers: Array<ModelTypes["GroupMember"]>,
 	/** An aggregate relationship */
 	GroupMembers_aggregate: ModelTypes["GroupMember_aggregate"],
-	/** An array relationship */
-	ScheduledExams: Array<ModelTypes["ScheduledExam"]>,
-	/** An aggregate relationship */
-	ScheduledExams_aggregate: ModelTypes["ScheduledExam_aggregate"],
 	created_at: ModelTypes["timestamp"],
 	description?: string | undefined,
 	email?: string | undefined,
@@ -5495,6 +5551,10 @@ export type ModelTypes = {
 	name: string,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
+	/** An array relationship */
+	scheduledExamsByGroupId: Array<ModelTypes["ScheduledExam"]>,
+	/** An aggregate relationship */
+	scheduledExamsByGroupId_aggregate: ModelTypes["ScheduledExam_aggregate"],
 	updated_at?: ModelTypes["timestamp"] | undefined,
 	website?: string | undefined
 };
@@ -5671,8 +5731,6 @@ export type ModelTypes = {
 ["Group_bool_exp"]: {
 	GroupMembers?: ModelTypes["GroupMember_bool_exp"] | undefined,
 	GroupMembers_aggregate?: ModelTypes["GroupMember_aggregate_bool_exp"] | undefined,
-	ScheduledExams?: ModelTypes["ScheduledExam_bool_exp"] | undefined,
-	ScheduledExams_aggregate?: ModelTypes["ScheduledExam_aggregate_bool_exp"] | undefined,
 	_and?: Array<ModelTypes["Group_bool_exp"]> | undefined,
 	_not?: ModelTypes["Group_bool_exp"] | undefined,
 	_or?: Array<ModelTypes["Group_bool_exp"]> | undefined,
@@ -5683,6 +5741,8 @@ export type ModelTypes = {
 	name?: ModelTypes["String_comparison_exp"] | undefined,
 	phone?: ModelTypes["String_comparison_exp"] | undefined,
 	picture_url?: ModelTypes["String_comparison_exp"] | undefined,
+	scheduledExamsByGroupId?: ModelTypes["ScheduledExam_bool_exp"] | undefined,
+	scheduledExamsByGroupId_aggregate?: ModelTypes["ScheduledExam_aggregate_bool_exp"] | undefined,
 	updated_at?: ModelTypes["timestamp_comparison_exp"] | undefined,
 	website?: ModelTypes["String_comparison_exp"] | undefined
 };
@@ -5690,7 +5750,6 @@ export type ModelTypes = {
 	/** input type for inserting data into table "Group" */
 ["Group_insert_input"]: {
 	GroupMembers?: ModelTypes["GroupMember_arr_rel_insert_input"] | undefined,
-	ScheduledExams?: ModelTypes["ScheduledExam_arr_rel_insert_input"] | undefined,
 	created_at?: ModelTypes["timestamp"] | undefined,
 	description?: string | undefined,
 	email?: string | undefined,
@@ -5698,6 +5757,7 @@ export type ModelTypes = {
 	name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
+	scheduledExamsByGroupId?: ModelTypes["ScheduledExam_arr_rel_insert_input"] | undefined,
 	updated_at?: ModelTypes["timestamp"] | undefined,
 	website?: string | undefined
 };
@@ -5747,7 +5807,6 @@ export type ModelTypes = {
 	/** Ordering options when selecting data from "Group". */
 ["Group_order_by"]: {
 	GroupMembers_aggregate?: ModelTypes["GroupMember_aggregate_order_by"] | undefined,
-	ScheduledExams_aggregate?: ModelTypes["ScheduledExam_aggregate_order_by"] | undefined,
 	created_at?: ModelTypes["order_by"] | undefined,
 	description?: ModelTypes["order_by"] | undefined,
 	email?: ModelTypes["order_by"] | undefined,
@@ -5755,6 +5814,7 @@ export type ModelTypes = {
 	name?: ModelTypes["order_by"] | undefined,
 	phone?: ModelTypes["order_by"] | undefined,
 	picture_url?: ModelTypes["order_by"] | undefined,
+	scheduledExamsByGroupId_aggregate?: ModelTypes["ScheduledExam_aggregate_order_by"] | undefined,
 	updated_at?: ModelTypes["order_by"] | undefined,
 	website?: ModelTypes["order_by"] | undefined
 };
@@ -6307,7 +6367,7 @@ export type ModelTypes = {
 ["Question"]: {
 		/** An object relationship */
 	Exam: ModelTypes["Exam"],
-	boolean_expected_answer: boolean,
+	boolean_expected_answer?: boolean | undefined,
 	correct_options?: Array<boolean> | undefined,
 	created_at: ModelTypes["timestamp"],
 	exam_id: string,
@@ -6544,16 +6604,19 @@ export type ModelTypes = {
 	/** columns and relationships of "ScheduledExam" */
 ["ScheduledExam"]: {
 		/** An object relationship */
-	Exam: ModelTypes["Exam"],
+	Profile?: ModelTypes["Profile"] | undefined,
+	created_at: ModelTypes["timestamp"],
+	end_time: ModelTypes["timestamp"],
 	/** An object relationship */
-	Group: ModelTypes["Group"],
+	examByExamId: ModelTypes["Exam"],
+	exam_id: string,
 	/** An object relationship */
-	Profile: ModelTypes["Profile"],
-	date: ModelTypes["timestamp"],
-	examId: string,
-	groupId: string,
+	groupByGroupId?: ModelTypes["Group"] | undefined,
+	group_id?: string | undefined,
 	id: string,
-	profile_id: string
+	profile_id?: string | undefined,
+	start_time: ModelTypes["timestamp"],
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	/** aggregated selection of "ScheduledExam" */
 ["ScheduledExam_aggregate"]: {
@@ -6589,61 +6652,79 @@ export type ModelTypes = {
 };
 	/** Boolean expression to filter rows from the table "ScheduledExam". All fields are combined with a logical 'AND'. */
 ["ScheduledExam_bool_exp"]: {
-	Exam?: ModelTypes["Exam_bool_exp"] | undefined,
-	Group?: ModelTypes["Group_bool_exp"] | undefined,
 	Profile?: ModelTypes["Profile_bool_exp"] | undefined,
 	_and?: Array<ModelTypes["ScheduledExam_bool_exp"]> | undefined,
 	_not?: ModelTypes["ScheduledExam_bool_exp"] | undefined,
 	_or?: Array<ModelTypes["ScheduledExam_bool_exp"]> | undefined,
-	date?: ModelTypes["timestamp_comparison_exp"] | undefined,
-	examId?: ModelTypes["String_comparison_exp"] | undefined,
-	groupId?: ModelTypes["String_comparison_exp"] | undefined,
+	created_at?: ModelTypes["timestamp_comparison_exp"] | undefined,
+	end_time?: ModelTypes["timestamp_comparison_exp"] | undefined,
+	examByExamId?: ModelTypes["Exam_bool_exp"] | undefined,
+	exam_id?: ModelTypes["String_comparison_exp"] | undefined,
+	groupByGroupId?: ModelTypes["Group_bool_exp"] | undefined,
+	group_id?: ModelTypes["String_comparison_exp"] | undefined,
 	id?: ModelTypes["String_comparison_exp"] | undefined,
-	profile_id?: ModelTypes["String_comparison_exp"] | undefined
+	profile_id?: ModelTypes["String_comparison_exp"] | undefined,
+	start_time?: ModelTypes["timestamp_comparison_exp"] | undefined,
+	updated_at?: ModelTypes["timestamp_comparison_exp"] | undefined
 };
 	["ScheduledExam_constraint"]:ScheduledExam_constraint;
 	/** input type for inserting data into table "ScheduledExam" */
 ["ScheduledExam_insert_input"]: {
-	Exam?: ModelTypes["Exam_obj_rel_insert_input"] | undefined,
-	Group?: ModelTypes["Group_obj_rel_insert_input"] | undefined,
 	Profile?: ModelTypes["Profile_obj_rel_insert_input"] | undefined,
-	date?: ModelTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+	created_at?: ModelTypes["timestamp"] | undefined,
+	end_time?: ModelTypes["timestamp"] | undefined,
+	examByExamId?: ModelTypes["Exam_obj_rel_insert_input"] | undefined,
+	exam_id?: string | undefined,
+	groupByGroupId?: ModelTypes["Group_obj_rel_insert_input"] | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: ModelTypes["timestamp"] | undefined,
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	/** aggregate max on columns */
 ["ScheduledExam_max_fields"]: {
-		date?: ModelTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+		created_at?: ModelTypes["timestamp"] | undefined,
+	end_time?: ModelTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: ModelTypes["timestamp"] | undefined,
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	/** order by max() on columns of table "ScheduledExam" */
 ["ScheduledExam_max_order_by"]: {
-	date?: ModelTypes["order_by"] | undefined,
-	examId?: ModelTypes["order_by"] | undefined,
-	groupId?: ModelTypes["order_by"] | undefined,
+	created_at?: ModelTypes["order_by"] | undefined,
+	end_time?: ModelTypes["order_by"] | undefined,
+	exam_id?: ModelTypes["order_by"] | undefined,
+	group_id?: ModelTypes["order_by"] | undefined,
 	id?: ModelTypes["order_by"] | undefined,
-	profile_id?: ModelTypes["order_by"] | undefined
+	profile_id?: ModelTypes["order_by"] | undefined,
+	start_time?: ModelTypes["order_by"] | undefined,
+	updated_at?: ModelTypes["order_by"] | undefined
 };
 	/** aggregate min on columns */
 ["ScheduledExam_min_fields"]: {
-		date?: ModelTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+		created_at?: ModelTypes["timestamp"] | undefined,
+	end_time?: ModelTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: ModelTypes["timestamp"] | undefined,
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	/** order by min() on columns of table "ScheduledExam" */
 ["ScheduledExam_min_order_by"]: {
-	date?: ModelTypes["order_by"] | undefined,
-	examId?: ModelTypes["order_by"] | undefined,
-	groupId?: ModelTypes["order_by"] | undefined,
+	created_at?: ModelTypes["order_by"] | undefined,
+	end_time?: ModelTypes["order_by"] | undefined,
+	exam_id?: ModelTypes["order_by"] | undefined,
+	group_id?: ModelTypes["order_by"] | undefined,
 	id?: ModelTypes["order_by"] | undefined,
-	profile_id?: ModelTypes["order_by"] | undefined
+	profile_id?: ModelTypes["order_by"] | undefined,
+	start_time?: ModelTypes["order_by"] | undefined,
+	updated_at?: ModelTypes["order_by"] | undefined
 };
 	/** response of any mutation on the table "ScheduledExam" */
 ["ScheduledExam_mutation_response"]: {
@@ -6660,14 +6741,17 @@ export type ModelTypes = {
 };
 	/** Ordering options when selecting data from "ScheduledExam". */
 ["ScheduledExam_order_by"]: {
-	Exam?: ModelTypes["Exam_order_by"] | undefined,
-	Group?: ModelTypes["Group_order_by"] | undefined,
 	Profile?: ModelTypes["Profile_order_by"] | undefined,
-	date?: ModelTypes["order_by"] | undefined,
-	examId?: ModelTypes["order_by"] | undefined,
-	groupId?: ModelTypes["order_by"] | undefined,
+	created_at?: ModelTypes["order_by"] | undefined,
+	end_time?: ModelTypes["order_by"] | undefined,
+	examByExamId?: ModelTypes["Exam_order_by"] | undefined,
+	exam_id?: ModelTypes["order_by"] | undefined,
+	groupByGroupId?: ModelTypes["Group_order_by"] | undefined,
+	group_id?: ModelTypes["order_by"] | undefined,
 	id?: ModelTypes["order_by"] | undefined,
-	profile_id?: ModelTypes["order_by"] | undefined
+	profile_id?: ModelTypes["order_by"] | undefined,
+	start_time?: ModelTypes["order_by"] | undefined,
+	updated_at?: ModelTypes["order_by"] | undefined
 };
 	/** primary key columns input for table: ScheduledExam */
 ["ScheduledExam_pk_columns_input"]: {
@@ -6676,11 +6760,14 @@ export type ModelTypes = {
 	["ScheduledExam_select_column"]:ScheduledExam_select_column;
 	/** input type for updating data in table "ScheduledExam" */
 ["ScheduledExam_set_input"]: {
-	date?: ModelTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+	created_at?: ModelTypes["timestamp"] | undefined,
+	end_time?: ModelTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: ModelTypes["timestamp"] | undefined,
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	/** Streaming cursor of the table "ScheduledExam" */
 ["ScheduledExam_stream_cursor_input"]: {
@@ -6691,11 +6778,14 @@ export type ModelTypes = {
 };
 	/** Initial value of the column from where the streaming should start */
 ["ScheduledExam_stream_cursor_value_input"]: {
-	date?: ModelTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+	created_at?: ModelTypes["timestamp"] | undefined,
+	end_time?: ModelTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: ModelTypes["timestamp"] | undefined,
+	updated_at?: ModelTypes["timestamp"] | undefined
 };
 	["ScheduledExam_update_column"]:ScheduledExam_update_column;
 	["ScheduledExam_updates"]: {
@@ -7400,10 +7490,6 @@ export type GraphQLTypes = {
 	GroupMembers: Array<GraphQLTypes["GroupMember"]>,
 	/** An aggregate relationship */
 	GroupMembers_aggregate: GraphQLTypes["GroupMember_aggregate"],
-	/** An array relationship */
-	ScheduledExams: Array<GraphQLTypes["ScheduledExam"]>,
-	/** An aggregate relationship */
-	ScheduledExams_aggregate: GraphQLTypes["ScheduledExam_aggregate"],
 	created_at: GraphQLTypes["timestamp"],
 	description?: string | undefined,
 	email?: string | undefined,
@@ -7411,6 +7497,10 @@ export type GraphQLTypes = {
 	name: string,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
+	/** An array relationship */
+	scheduledExamsByGroupId: Array<GraphQLTypes["ScheduledExam"]>,
+	/** An aggregate relationship */
+	scheduledExamsByGroupId_aggregate: GraphQLTypes["ScheduledExam_aggregate"],
 	updated_at?: GraphQLTypes["timestamp"] | undefined,
 	website?: string | undefined
 };
@@ -7598,8 +7688,6 @@ export type GraphQLTypes = {
 ["Group_bool_exp"]: {
 		GroupMembers?: GraphQLTypes["GroupMember_bool_exp"] | undefined,
 	GroupMembers_aggregate?: GraphQLTypes["GroupMember_aggregate_bool_exp"] | undefined,
-	ScheduledExams?: GraphQLTypes["ScheduledExam_bool_exp"] | undefined,
-	ScheduledExams_aggregate?: GraphQLTypes["ScheduledExam_aggregate_bool_exp"] | undefined,
 	_and?: Array<GraphQLTypes["Group_bool_exp"]> | undefined,
 	_not?: GraphQLTypes["Group_bool_exp"] | undefined,
 	_or?: Array<GraphQLTypes["Group_bool_exp"]> | undefined,
@@ -7610,6 +7698,8 @@ export type GraphQLTypes = {
 	name?: GraphQLTypes["String_comparison_exp"] | undefined,
 	phone?: GraphQLTypes["String_comparison_exp"] | undefined,
 	picture_url?: GraphQLTypes["String_comparison_exp"] | undefined,
+	scheduledExamsByGroupId?: GraphQLTypes["ScheduledExam_bool_exp"] | undefined,
+	scheduledExamsByGroupId_aggregate?: GraphQLTypes["ScheduledExam_aggregate_bool_exp"] | undefined,
 	updated_at?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
 	website?: GraphQLTypes["String_comparison_exp"] | undefined
 };
@@ -7618,7 +7708,6 @@ export type GraphQLTypes = {
 	/** input type for inserting data into table "Group" */
 ["Group_insert_input"]: {
 		GroupMembers?: GraphQLTypes["GroupMember_arr_rel_insert_input"] | undefined,
-	ScheduledExams?: GraphQLTypes["ScheduledExam_arr_rel_insert_input"] | undefined,
 	created_at?: GraphQLTypes["timestamp"] | undefined,
 	description?: string | undefined,
 	email?: string | undefined,
@@ -7626,6 +7715,7 @@ export type GraphQLTypes = {
 	name?: string | undefined,
 	phone?: string | undefined,
 	picture_url?: string | undefined,
+	scheduledExamsByGroupId?: GraphQLTypes["ScheduledExam_arr_rel_insert_input"] | undefined,
 	updated_at?: GraphQLTypes["timestamp"] | undefined,
 	website?: string | undefined
 };
@@ -7678,7 +7768,6 @@ export type GraphQLTypes = {
 	/** Ordering options when selecting data from "Group". */
 ["Group_order_by"]: {
 		GroupMembers_aggregate?: GraphQLTypes["GroupMember_aggregate_order_by"] | undefined,
-	ScheduledExams_aggregate?: GraphQLTypes["ScheduledExam_aggregate_order_by"] | undefined,
 	created_at?: GraphQLTypes["order_by"] | undefined,
 	description?: GraphQLTypes["order_by"] | undefined,
 	email?: GraphQLTypes["order_by"] | undefined,
@@ -7686,6 +7775,7 @@ export type GraphQLTypes = {
 	name?: GraphQLTypes["order_by"] | undefined,
 	phone?: GraphQLTypes["order_by"] | undefined,
 	picture_url?: GraphQLTypes["order_by"] | undefined,
+	scheduledExamsByGroupId_aggregate?: GraphQLTypes["ScheduledExam_aggregate_order_by"] | undefined,
 	updated_at?: GraphQLTypes["order_by"] | undefined,
 	website?: GraphQLTypes["order_by"] | undefined
 };
@@ -8268,7 +8358,7 @@ export type GraphQLTypes = {
 	__typename: "Question",
 	/** An object relationship */
 	Exam: GraphQLTypes["Exam"],
-	boolean_expected_answer: boolean,
+	boolean_expected_answer?: boolean | undefined,
 	correct_options?: Array<boolean> | undefined,
 	created_at: GraphQLTypes["timestamp"],
 	exam_id: string,
@@ -8516,16 +8606,19 @@ export type GraphQLTypes = {
 ["ScheduledExam"]: {
 	__typename: "ScheduledExam",
 	/** An object relationship */
-	Exam: GraphQLTypes["Exam"],
+	Profile?: GraphQLTypes["Profile"] | undefined,
+	created_at: GraphQLTypes["timestamp"],
+	end_time: GraphQLTypes["timestamp"],
 	/** An object relationship */
-	Group: GraphQLTypes["Group"],
+	examByExamId: GraphQLTypes["Exam"],
+	exam_id: string,
 	/** An object relationship */
-	Profile: GraphQLTypes["Profile"],
-	date: GraphQLTypes["timestamp"],
-	examId: string,
-	groupId: string,
+	groupByGroupId?: GraphQLTypes["Group"] | undefined,
+	group_id?: string | undefined,
 	id: string,
-	profile_id: string
+	profile_id?: string | undefined,
+	start_time: GraphQLTypes["timestamp"],
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** aggregated selection of "ScheduledExam" */
 ["ScheduledExam_aggregate"]: {
@@ -8563,64 +8656,82 @@ export type GraphQLTypes = {
 };
 	/** Boolean expression to filter rows from the table "ScheduledExam". All fields are combined with a logical 'AND'. */
 ["ScheduledExam_bool_exp"]: {
-		Exam?: GraphQLTypes["Exam_bool_exp"] | undefined,
-	Group?: GraphQLTypes["Group_bool_exp"] | undefined,
-	Profile?: GraphQLTypes["Profile_bool_exp"] | undefined,
+		Profile?: GraphQLTypes["Profile_bool_exp"] | undefined,
 	_and?: Array<GraphQLTypes["ScheduledExam_bool_exp"]> | undefined,
 	_not?: GraphQLTypes["ScheduledExam_bool_exp"] | undefined,
 	_or?: Array<GraphQLTypes["ScheduledExam_bool_exp"]> | undefined,
-	date?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
-	examId?: GraphQLTypes["String_comparison_exp"] | undefined,
-	groupId?: GraphQLTypes["String_comparison_exp"] | undefined,
+	created_at?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
+	end_time?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
+	examByExamId?: GraphQLTypes["Exam_bool_exp"] | undefined,
+	exam_id?: GraphQLTypes["String_comparison_exp"] | undefined,
+	groupByGroupId?: GraphQLTypes["Group_bool_exp"] | undefined,
+	group_id?: GraphQLTypes["String_comparison_exp"] | undefined,
 	id?: GraphQLTypes["String_comparison_exp"] | undefined,
-	profile_id?: GraphQLTypes["String_comparison_exp"] | undefined
+	profile_id?: GraphQLTypes["String_comparison_exp"] | undefined,
+	start_time?: GraphQLTypes["timestamp_comparison_exp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp_comparison_exp"] | undefined
 };
 	/** unique or primary key constraints on table "ScheduledExam" */
 ["ScheduledExam_constraint"]: ScheduledExam_constraint;
 	/** input type for inserting data into table "ScheduledExam" */
 ["ScheduledExam_insert_input"]: {
-		Exam?: GraphQLTypes["Exam_obj_rel_insert_input"] | undefined,
-	Group?: GraphQLTypes["Group_obj_rel_insert_input"] | undefined,
-	Profile?: GraphQLTypes["Profile_obj_rel_insert_input"] | undefined,
-	date?: GraphQLTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+		Profile?: GraphQLTypes["Profile_obj_rel_insert_input"] | undefined,
+	created_at?: GraphQLTypes["timestamp"] | undefined,
+	end_time?: GraphQLTypes["timestamp"] | undefined,
+	examByExamId?: GraphQLTypes["Exam_obj_rel_insert_input"] | undefined,
+	exam_id?: string | undefined,
+	groupByGroupId?: GraphQLTypes["Group_obj_rel_insert_input"] | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: GraphQLTypes["timestamp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** aggregate max on columns */
 ["ScheduledExam_max_fields"]: {
 	__typename: "ScheduledExam_max_fields",
-	date?: GraphQLTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+	created_at?: GraphQLTypes["timestamp"] | undefined,
+	end_time?: GraphQLTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: GraphQLTypes["timestamp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** order by max() on columns of table "ScheduledExam" */
 ["ScheduledExam_max_order_by"]: {
-		date?: GraphQLTypes["order_by"] | undefined,
-	examId?: GraphQLTypes["order_by"] | undefined,
-	groupId?: GraphQLTypes["order_by"] | undefined,
+		created_at?: GraphQLTypes["order_by"] | undefined,
+	end_time?: GraphQLTypes["order_by"] | undefined,
+	exam_id?: GraphQLTypes["order_by"] | undefined,
+	group_id?: GraphQLTypes["order_by"] | undefined,
 	id?: GraphQLTypes["order_by"] | undefined,
-	profile_id?: GraphQLTypes["order_by"] | undefined
+	profile_id?: GraphQLTypes["order_by"] | undefined,
+	start_time?: GraphQLTypes["order_by"] | undefined,
+	updated_at?: GraphQLTypes["order_by"] | undefined
 };
 	/** aggregate min on columns */
 ["ScheduledExam_min_fields"]: {
 	__typename: "ScheduledExam_min_fields",
-	date?: GraphQLTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+	created_at?: GraphQLTypes["timestamp"] | undefined,
+	end_time?: GraphQLTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: GraphQLTypes["timestamp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** order by min() on columns of table "ScheduledExam" */
 ["ScheduledExam_min_order_by"]: {
-		date?: GraphQLTypes["order_by"] | undefined,
-	examId?: GraphQLTypes["order_by"] | undefined,
-	groupId?: GraphQLTypes["order_by"] | undefined,
+		created_at?: GraphQLTypes["order_by"] | undefined,
+	end_time?: GraphQLTypes["order_by"] | undefined,
+	exam_id?: GraphQLTypes["order_by"] | undefined,
+	group_id?: GraphQLTypes["order_by"] | undefined,
 	id?: GraphQLTypes["order_by"] | undefined,
-	profile_id?: GraphQLTypes["order_by"] | undefined
+	profile_id?: GraphQLTypes["order_by"] | undefined,
+	start_time?: GraphQLTypes["order_by"] | undefined,
+	updated_at?: GraphQLTypes["order_by"] | undefined
 };
 	/** response of any mutation on the table "ScheduledExam" */
 ["ScheduledExam_mutation_response"]: {
@@ -8638,14 +8749,17 @@ export type GraphQLTypes = {
 };
 	/** Ordering options when selecting data from "ScheduledExam". */
 ["ScheduledExam_order_by"]: {
-		Exam?: GraphQLTypes["Exam_order_by"] | undefined,
-	Group?: GraphQLTypes["Group_order_by"] | undefined,
-	Profile?: GraphQLTypes["Profile_order_by"] | undefined,
-	date?: GraphQLTypes["order_by"] | undefined,
-	examId?: GraphQLTypes["order_by"] | undefined,
-	groupId?: GraphQLTypes["order_by"] | undefined,
+		Profile?: GraphQLTypes["Profile_order_by"] | undefined,
+	created_at?: GraphQLTypes["order_by"] | undefined,
+	end_time?: GraphQLTypes["order_by"] | undefined,
+	examByExamId?: GraphQLTypes["Exam_order_by"] | undefined,
+	exam_id?: GraphQLTypes["order_by"] | undefined,
+	groupByGroupId?: GraphQLTypes["Group_order_by"] | undefined,
+	group_id?: GraphQLTypes["order_by"] | undefined,
 	id?: GraphQLTypes["order_by"] | undefined,
-	profile_id?: GraphQLTypes["order_by"] | undefined
+	profile_id?: GraphQLTypes["order_by"] | undefined,
+	start_time?: GraphQLTypes["order_by"] | undefined,
+	updated_at?: GraphQLTypes["order_by"] | undefined
 };
 	/** primary key columns input for table: ScheduledExam */
 ["ScheduledExam_pk_columns_input"]: {
@@ -8655,11 +8769,14 @@ export type GraphQLTypes = {
 ["ScheduledExam_select_column"]: ScheduledExam_select_column;
 	/** input type for updating data in table "ScheduledExam" */
 ["ScheduledExam_set_input"]: {
-		date?: GraphQLTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+		created_at?: GraphQLTypes["timestamp"] | undefined,
+	end_time?: GraphQLTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: GraphQLTypes["timestamp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** Streaming cursor of the table "ScheduledExam" */
 ["ScheduledExam_stream_cursor_input"]: {
@@ -8670,11 +8787,14 @@ export type GraphQLTypes = {
 };
 	/** Initial value of the column from where the streaming should start */
 ["ScheduledExam_stream_cursor_value_input"]: {
-		date?: GraphQLTypes["timestamp"] | undefined,
-	examId?: string | undefined,
-	groupId?: string | undefined,
+		created_at?: GraphQLTypes["timestamp"] | undefined,
+	end_time?: GraphQLTypes["timestamp"] | undefined,
+	exam_id?: string | undefined,
+	group_id?: string | undefined,
 	id?: string | undefined,
-	profile_id?: string | undefined
+	profile_id?: string | undefined,
+	start_time?: GraphQLTypes["timestamp"] | undefined,
+	updated_at?: GraphQLTypes["timestamp"] | undefined
 };
 	/** update columns of table "ScheduledExam" */
 ["ScheduledExam_update_column"]: ScheduledExam_update_column;
@@ -9414,19 +9534,25 @@ export const enum ScheduledExam_constraint {
 }
 /** select columns of table "ScheduledExam" */
 export const enum ScheduledExam_select_column {
-	date = "date",
-	examId = "examId",
-	groupId = "groupId",
+	created_at = "created_at",
+	end_time = "end_time",
+	exam_id = "exam_id",
+	group_id = "group_id",
 	id = "id",
-	profile_id = "profile_id"
+	profile_id = "profile_id",
+	start_time = "start_time",
+	updated_at = "updated_at"
 }
 /** update columns of table "ScheduledExam" */
 export const enum ScheduledExam_update_column {
-	date = "date",
-	examId = "examId",
-	groupId = "groupId",
+	created_at = "created_at",
+	end_time = "end_time",
+	exam_id = "exam_id",
+	group_id = "group_id",
 	id = "id",
-	profile_id = "profile_id"
+	profile_id = "profile_id",
+	start_time = "start_time",
+	updated_at = "updated_at"
 }
 /** unique or primary key constraints on table "_prisma_migrations" */
 export const enum _prisma_migrations_constraint {
