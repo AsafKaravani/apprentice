@@ -11,8 +11,8 @@ pipeline {
 										// print all environment variables
 										sh 'printenv'
 										// Set environment variables
-										sh 'export NAMESPACE=BRANCH_NAME'
-										sh 'export TAG=${GIT_COMMIT[0..7]}'
+										sh 'export NAMESPACE=$GIT_BRANCH'
+										sh 'export TAG=$GIT_COMMIT'
 
 										sh 'echo $NAMESPACE'
 										sh 'echo $TAG'
