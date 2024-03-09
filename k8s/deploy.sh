@@ -7,7 +7,7 @@ echo $KUBE_CONFIG | base64 --decode > "$decoded_kube_config_path"
 # Option 1: Set the KUBECONFIG environment variable to use the decoded file
 export KUBECONFIG="$decoded_kube_config_path"
 
-source ./k8s/scripts/set-node-ports.sh
+source ./k8s/scripts/set-endpoints.sh
 
 replace_env_vars() {
 
