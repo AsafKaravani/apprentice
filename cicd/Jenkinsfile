@@ -11,11 +11,11 @@ pipeline {
 										// print all environment variables
 										sh 'printenv'
 										// Set environment variables
-										export NAMESPACE=$GIT_BRANCH
-										export TAG=$GIT_COMMIT
+										env.NAMESPACE = GIT_BRANCH
+										env.TAG = GIT_COMMIT
 
-										echo $NAMESPACE
-										echo $TAG
+										sh 'echo $NAMESPACE'
+										sh 'echo $TAG'
 								}
 						}
 				}
