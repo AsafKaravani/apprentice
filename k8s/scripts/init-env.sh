@@ -1,16 +1,23 @@
 
 if [ "$USING_DOCKER_COMPOSE" != "true" ]; then
 	echo "Port-forwarding into the cluster..."
-	export PG_POD=$(kubectl get pods -n $NAMESPACE -l app=postgres -o custom-columns=:metadata.name --no-headers) # Get the name of the postgres pod
+	PG_POD=$(kubectl get pods -n $NAMESPACE -l app=postgres -o custom-columns=:metadata.name --no-headers) # Get the name of the postgres pod
 	echo "Postgres pod: $PG_POD" 
 
 	TEMP_FILE=$(mktemp)
+	echo "Temp file: $TEMP_FILE"
+	cat $TEMP_FILE
+	echo "End of temp file"
 
 	kubectl port-forward pod/$PG_POD 0:5432 -n $NAMESPACE > $TEMP_FILE 2>&1 &
 
 	PID=$! # Save the process ID to kill the port-forwarding later
-	sleep 2 # Wait for the port-forwarding to start
+	echo "Sleeping for 5 seconds..."
+	sleep 5 # Wait for the port-forwarding to start
+	echo "Temp file contents:"
 	cat $TEMP_FILE
+	echo "End of temp file contents"
+
 	LOCAL_PG_PORT=$(grep -o '127.0.0.1:[0-9]*' $TEMP_FILE | tail -n 1 | awk -F ':' '{print $2}')
 
 	trap "kill $PID" EXIT # Kill the port-forwarding when the script exits
